@@ -167,28 +167,37 @@ If missing, it needs to be built with QE (the conda package should include it).
 
 ## 8. Install Pseudopotentials
 
-```bash
-# install ubuntu package for base pseudopotentials
-sudo apt install -y quantum-espresso-data
+We use the **JTH PAW v2.0** pseudopotential library from ABINIT - a complete, uniform set of PAW pseudopotentials covering 86 elements. This avoids issues from mixing different pseudopotential types (PAW vs ultrasoft).
 
-# verify
-ls /usr/share/espresso/pseudo/ | wc -l
+```bash
+# create pseudo directory
+sudo mkdir -p /usr/share/espresso/pseudo
+
+# download the complete JTH PAW v2.0 library (GGA-PBE, UPF format)
+cd /tmp
+curl -L -o jth_paw.tar.gz "https://github.com/abinit/paw_jth_datasets/raw/main/pseudos/JTH-PBE-v2.0/JTH-v2.0-GGA-PBE-atomicdata-upf.tar.gz"
+
+# extract and install
+tar -xzf jth_paw.tar.gz
+sudo cp JTH-v2.0-GGA-PBE-atomicdata-upf/*.UPF /usr/share/espresso/pseudo/
+
+# cleanup
+rm -rf jth_paw.tar.gz JTH-v2.0-GGA-PBE-atomicdata-upf
+
+# verify installation
+echo "Installed $(ls /usr/share/espresso/pseudo/*.UPF | wc -l) pseudopotentials"
+echo "Covering $(ls /usr/share/espresso/pseudo/*.UPF | xargs -n1 basename | cut -d. -f1 | sort -u | wc -l) elements"
 ```
 
-For additional pseudopotentials (PBE), download from QE website:
-# NOTE: you will most likely have to download more for materials with more obscure elements
-```bash
-cd /usr/share/espresso/pseudo/
+**Library details:**
+- **Source:** ABINIT JTH PAW v2.0 (https://www.abinit.org/pseudopotential.html)
+- **Type:** PAW (Projector Augmented Wave) - all files are consistent
+- **Functional:** GGA-PBE
+- **Format:** UPF (Quantum ESPRESSO compatible)
+- **Coverage:** 86 elements (H to Rn, including lanthanides)
+- **Naming:** `Element.GGA_PBE-JTH.UPF` (some elements have `_sp` semicore variants)
 
-# example: download common elements
-for elem in H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca \
-            Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr \
-            Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe; do
-    sudo wget -q "https://pseudopotentials.quantum-espresso.org/upf_files/${elem}.pbe-n-kjpaw_psl.1.0.0.UPF" 2>/dev/null || \
-    sudo wget -q "https://pseudopotentials.quantum-espresso.org/upf_files/${elem}.pbe-kjpaw_psl.1.0.0.UPF" 2>/dev/null || \
-    sudo wget -q "https://www.quantum-espresso.org/upf_files/${elem}.UPF" 2>/dev/null || true
-done
-```
+This library is well-tested and suitable for high-throughput calculations with any JARVIS material.
 
 ## 9. Register Jupyter Kernel
 
@@ -270,7 +279,14 @@ nproc  # check available cores
 ```
 
 ### Missing pseudopotential for element X
-Download from https://www.quantum-espresso.org/pseudopotentials/ and place in `/usr/share/espresso/pseudo/`
+The JTH PAW v2.0 library covers 86 elements (H-Rn). If you need an element not included, download from:
+- https://www.abinit.org/pseudopotential.html (PAW datasets - recommended for consistency)
+- https://www.quantum-espresso.org/pseudopotentials/ (PSlibrary)
+
+Place downloaded files in `/usr/share/espresso/pseudo/`
+
+### "S matrix not positive definite" error
+This usually means you're mixing PAW and ultrasoft pseudopotentials. Ensure all pseudopotentials are from the same library (JTH PAW). Re-run the installation step 8 if needed.
 
 ### TRIQS import errors
 Ensure `LD_LIBRARY_PATH` includes the conda lib directory and restart the kernel.
