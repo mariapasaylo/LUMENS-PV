@@ -1,6 +1,6 @@
-# DFT + Wannier90 Pipeline Installation Guide (Ubuntu ARM64)
+# DFT + NIEL Pipeline Installation Guide (Ubuntu ARM64)
 
-Complete installation instructions for running the DFT + Wannier90 pipeline for NIEL displacement threshold calculations on Ubuntu ARM64 (aarch64).
+Complete installation instructions for running the DFT + NIEL pipeline for displacement damage calculations on Ubuntu ARM64 (aarch64).
 
 ## Prerequisites
 
@@ -52,57 +52,7 @@ which pw.x
 pw.x --version
 ```
 
-## 4. Build Wannier90 from Source
-
-Wannier90 is not available on conda-forge for ARM64, so we build from source.
-
-```bash
-conda activate DSI
-cd ~
-
-# download and extract
-wget https://github.com/wannier-developers/wannier90/archive/refs/tags/v3.1.0.tar.gz
-tar -xzf v3.1.0.tar.gz
-cd wannier90-3.1.0
-
-# create make.inc
-cat > make.inc << 'EOF'
-F90 = gfortran
-FCOPTS = -O3 -fPIC
-LDOPTS = -O3
-COMMS = mpi
-MPIF90 = mpif90
-LIBS = -L${CONDA_PREFIX}/lib -lopenblas -llapack
-EOF
-
-# fix openblas symlink if needed
-ln -sf ${CONDA_PREFIX}/lib/libopenblasp-r*.so ${CONDA_PREFIX}/lib/libopenblas_.so 2>/dev/null || true
-
-# build
-make -j$(nproc)
-
-# install to conda prefix
-cp wannier90.x postw90.x w90chk2chk.x ${CONDA_PREFIX}/bin/
-cd ~
-rm -rf wannier90-3.1.0 v3.1.0.tar.gz
-```
-
-Verify:
-```bash
-which wannier90.x
-wannier90.x --version
-```
-
-## 5. Install pw2wannier90
-
-This should come with Quantum ESPRESSO. Verify:
-```bash
-which pw2wannier90.x
-```
-
-If missing, it needs to be built with QE (the conda package should include it).
-
-## 6. Install Pseudopotentials
+## 4. Install Pseudopotentials
 
 We use the **JTH PAW v2.0** pseudopotential library from ABINIT - a complete, uniform set of PAW pseudopotentials covering 86 elements. This avoids issues from mixing different pseudopotential types (PAW vs ultrasoft).
 
@@ -138,14 +88,14 @@ A symbolic link to the pseudopotentials is available at `pseudopotentials/` in t
 
 This library is well-tested and suitable for high-throughput calculations with any JARVIS material.
 
-## 7. Register Jupyter Kernel
+## 5. Register Jupyter Kernel
 
 ```bash
 conda activate DSI
 python -m ipykernel install --user --name DSI --display-name "DSI"
 ```
 
-## 8. Environment Variables
+## 6. Environment Variables
 
 Add to `~/.bashrc`:
 ```bash
@@ -161,7 +111,7 @@ Run this script to verify all components:
 conda activate DSI
 
 echo "=== Checking executables ==="
-for exe in pw.x wannier90.x pw2wannier90.x mpirun; do
+for exe in pw.x mpirun; do
     if which $exe > /dev/null 2>&1; then
         echo "OK: $exe -> $(which $exe)"
     else
@@ -193,7 +143,7 @@ echo "Pseudopotential files: $count"
 ```bash
 conda activate DSI
 cd /path/to/LUMENS-PV/calculating_energy_threshold_displacement
-jupyter notebook DFT+Wannier90.ipynb
+jupyter notebook DFT+NIEL.ipynb
 ```
 
 Or in VS Code, select the "DSI" kernel.
@@ -219,4 +169,4 @@ The JTH PAW v2.0 library covers 86 elements (H-Rn). If you need an element not i
 Place downloaded files in `/usr/share/espresso/pseudo/`
 
 ### "S matrix not positive definite" error
-This usually means you're mixing PAW and ultrasoft pseudopotentials. Ensure all pseudopotentials are from the same library (JTH PAW). Re-run the installation step 6 if needed.
+This usually means you're mixing PAW and ultrasoft pseudopotentials. Ensure all pseudopotentials are from the same library (JTH PAW). Re-run the installation step 4 if needed.
