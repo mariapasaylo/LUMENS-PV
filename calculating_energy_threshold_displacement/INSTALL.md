@@ -1,6 +1,6 @@
-# DFT & eDMFT Pipeline Installation Guide (Ubuntu ARM64)
+# DFT + Wannier90 Pipeline Installation Guide (Ubuntu ARM64)
 
-Complete installation instructions for running the DFT + Wannier90 + TRIQS CTHYB pipeline on Ubuntu ARM64 (aarch64).
+Complete installation instructions for running the DFT + Wannier90 pipeline for NIEL displacement threshold calculations on Ubuntu ARM64 (aarch64).
 
 ## Prerequisites
 
@@ -93,70 +93,7 @@ which wannier90.x
 wannier90.x --version
 ```
 
-## 5. Build TRIQS from Source
-
-TRIQS is not available on conda-forge for ARM64.
-
-```bash
-conda activate DSI
-cd ~
-
-# clone triqs
-git clone https://github.com/TRIQS/triqs.git --branch 3.3.x
-cd triqs
-mkdir build && cd build
-
-# configure
-cmake .. \
-    -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DPython_EXECUTABLE=$(which python) \
-    -DBUILD_SHARED_LIBS=ON
-
-# build and install
-make -j$(nproc)
-make install
-
-cd ~
-rm -rf triqs
-```
-
-Verify:
-```bash
-python -c "import triqs; print(triqs.__version__)"
-```
-
-## 6. Build TRIQS CTHYB from Source
-
-```bash
-conda activate DSI
-cd ~
-
-# clone cthyb
-git clone https://github.com/TRIQS/cthyb.git --branch 3.3.x
-cd cthyb
-mkdir build && cd build
-
-# configure
-cmake .. \
-    -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DPython_EXECUTABLE=$(which python)
-
-# build and install
-make -j$(nproc)
-make install
-
-cd ~
-rm -rf cthyb
-```
-
-Verify:
-```bash
-python -c "from triqs_cthyb import Solver; print('CTHYB OK')"
-```
-
-## 7. Install pw2wannier90
+## 5. Install pw2wannier90
 
 This should come with Quantum ESPRESSO. Verify:
 ```bash
@@ -165,7 +102,7 @@ which pw2wannier90.x
 
 If missing, it needs to be built with QE (the conda package should include it).
 
-## 8. Install Pseudopotentials
+## 6. Install Pseudopotentials
 
 We use the **JTH PAW v2.0** pseudopotential library from ABINIT - a complete, uniform set of PAW pseudopotentials covering 86 elements. This avoids issues from mixing different pseudopotential types (PAW vs ultrasoft).
 
@@ -197,16 +134,18 @@ echo "Covering $(ls /usr/share/espresso/pseudo/*.UPF | xargs -n1 basename | cut 
 - **Coverage:** 86 elements (H to Rn, including lanthanides)
 - **Naming:** `Element.GGA_PBE-JTH.UPF` (some elements have `_sp` semicore variants)
 
+A symbolic link to the pseudopotentials is available at `pseudopotentials/` in this directory for easy browsing.
+
 This library is well-tested and suitable for high-throughput calculations with any JARVIS material.
 
-## 9. Register Jupyter Kernel
+## 7. Register Jupyter Kernel
 
 ```bash
 conda activate DSI
-python -m ipykernel install --user --name DSI --display-name "DSI (TRIQS)"
+python -m ipykernel install --user --name DSI --display-name "DSI"
 ```
 
-## 10. Environment Variables
+## 8. Environment Variables
 
 Add to `~/.bashrc`:
 ```bash
@@ -234,19 +173,13 @@ echo ""
 echo "=== Checking Python packages ==="
 python << 'EOF'
 import sys
-for pkg in ['numpy', 'ase', 'jarvis', 'triqs', 'nglview', 'pandas']:
+for pkg in ['numpy', 'ase', 'jarvis', 'nglview', 'pandas']:
     try:
         mod = __import__(pkg)
         ver = getattr(mod, '__version__', 'OK')
         print(f"OK: {pkg} {ver}")
     except ImportError:
         print(f"MISSING: {pkg}")
-
-try:
-    from triqs_cthyb import Solver
-    print("OK: triqs_cthyb")
-except ImportError as e:
-    print(f"MISSING: triqs_cthyb ({e})")
 EOF
 
 echo ""
@@ -259,11 +192,11 @@ echo "Pseudopotential files: $count"
 
 ```bash
 conda activate DSI
-cd /path/to/LUMENS-PV/DFT_eDMFT
-jupyter notebook run_pipeline_notebook.ipynb
+cd /path/to/LUMENS-PV/calculating_energy_threshold_displacement
+jupyter notebook DFT+Wannier90.ipynb
 ```
 
-Or in VS Code, select the "DSI (TRIQS)" kernel.
+Or in VS Code, select the "DSI" kernel.
 
 ## Troubleshooting
 
@@ -286,7 +219,4 @@ The JTH PAW v2.0 library covers 86 elements (H-Rn). If you need an element not i
 Place downloaded files in `/usr/share/espresso/pseudo/`
 
 ### "S matrix not positive definite" error
-This usually means you're mixing PAW and ultrasoft pseudopotentials. Ensure all pseudopotentials are from the same library (JTH PAW). Re-run the installation step 8 if needed.
-
-### TRIQS import errors
-Ensure `LD_LIBRARY_PATH` includes the conda lib directory and restart the kernel.
+This usually means you're mixing PAW and ultrasoft pseudopotentials. Ensure all pseudopotentials are from the same library (JTH PAW). Re-run the installation step 6 if needed.
