@@ -1,12 +1,12 @@
-# NIEL for InP (protons)
-# density: 4.6694 g/cm³ (DFT PBE+D3 vc-relaxed)
-# cross-section: coulomb (SR+Mott) + nuclear elastic + nuclear inelastic (compound nucleus)
-# nuclear inelastic: Tripathi reaction XS + Weisskopf evaporation + residual recoil
-# lindhard: two-body robinson partition
-# displacement thresholds: P=8.7eV, In=8.8eV
-# references: Jun et al. (2003), Boschini et al. (2011), Tripathi et al. (1999), Nordlund et al. (2018)
+# niel for InP (protons)
+# density 4.6694 g/cm3 (dft pbe+d3 vc-relaxed)
+# cross-section coulomb (sr+mott) + nuclear elastic + nuclear inelastic (compound nucleus)
+# nuclear inelastic tripathi reaction xs + weisskopf evaporation + residual recoil
+# lindhard two-body robinson partition
+# displacement thresholds p 8.7 eV, in 8.8 eV
+# references jun et al. (2003), boschini et al. (2011), tripathi et al. (1999), nordlund et al. (2018)
 #
-# Energy_MeV	NIEL_total	NIEL_coulomb	NIEL_nuc_elastic	NIEL_nuc_inelastic
+# energy_mev	niel_total	niel_coulomb	niel_nuc_elastic	niel_nuc_inelastic
 1.000000e-01	2.122718e-01	2.122718e-01	0.000000e+00	0.000000e+00
 1.128838e-01	1.900778e-01	1.900778e-01	0.000000e+00	0.000000e+00
 1.274275e-01	1.701392e-01	1.701392e-01	0.000000e+00	0.000000e+00
