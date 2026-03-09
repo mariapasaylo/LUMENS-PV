@@ -14,6 +14,10 @@ precision vs compute-cost tradeoffs.
   - Earlier smoke runs hit QE rank/symmetry/file issues under `srun`.
 - Python used on HiPerGator: `/home/e.kolberg/local/dsi3/miniforge/envs/dsi3_full/bin/python3`
 - Pseudopotentials used on HiPerGator: `~/LUMENS-PV/pseudopotentials`
+- Storage constraint observed on HiPerGator:
+  - `~/` was full (`40G used / 40G total`) when the first bounded screen run was attempted.
+  - If `workspace` and `results-dir` stay under `~/LUMENS-PV`, Ed runs can fail with `Errno 28: No space left on device`.
+  - Use a filesystem with enough free quota for QE scratch, input, output, and JSON/CSV summaries.
 - GPU status:
   - Current production path is CPU-only.
   - Loading NVHPC-based `espresso` modules still resolved to a CPU `pw.x` binary on this system.
@@ -290,14 +294,18 @@ Goal:
 
 When checked on March 9, 2026:
 
-- the bounded screening pilot was running:
+- the bounded screening pilot had already started and reached the Ed scan:
   - Job `26704925_1`
   - InP / `JVASP-1183`
   - `32` CPUs, `192G`, `2:00:00` walltime
-- the live log showed:
-  - successful dataset load
-  - successful QE `vc-relax`
-  - Ed scan started on `In_s0`
+  - primitive k-points `[16, 16, 16]`
+  - supercell repeats `(3, 3, 3)` -> `54` atoms
+- the run then failed with storage exhaustion:
+  - `OSError: [Errno 28] No space left on device`
+  - failure occurred while writing Ed input/output files and then the summary JSON
+- conclusion:
+  - the parameter profile is starting correctly
+  - the current blocker is storage/quota, not the module stack or Slurm launch path
 
 To re-check current status later:
 
