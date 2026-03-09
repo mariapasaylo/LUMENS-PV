@@ -46,24 +46,99 @@ Outputs go to `calculating_energy_threshold_displacement/ed_outputs/`:
 
 ## Recommended Profiles
 
-For many-material throughput, start from the screening wrapper:
+For many-material throughput, start from the screening wrapper with explicit
+throughput-oriented overrides:
 
 ```bash
 cd /path/to/LUMENS-PV/calculating_energy_threshold_displacement
 chmod +x run_ed_pipeline_screen.slurm
-sbatch --array=1-N run_ed_pipeline_screen.slurm /path/to/materials.csv
+RESULTS_DIR=/path/to/fast_screen_outputs \
+ED_DIRECTIONS=4 \
+ED_POINTS=4 \
+REFINE_POINTS=0 \
+SUPERCELL_MIN_LENGTH=8.0 \
+ED_CUTOFF_SCALE=1.00 \
+ED_TIMEOUT=600 \
+sbatch --array=1-N run_ed_pipeline_screen.slurm /path/to/materials.csv \
+  --skip-qe-relax --force-qe
 ```
 
-`run_ed_pipeline_screen.slurm` is the bounded `1-2` hour profile:
+This validated fast-screen profile is the current recommended starting point for
+dozens of materials:
 
 - `--ed-mode static`
 - `--site-selection representative`
 - `--ed-kpoint-mode gamma`
-- about `10-12` directions
-- about `6` coarse points plus `2` refine points
+- `--skip-qe-relax`
+- `4` directions
+- `4` coarse points
+- `0` refine points
+- `8.0 A` supercell target
+- `--ed-cutoff-scale 1.00`
+- `--ed-timeout 600`
+
+Use that profile to rank many materials cheaply, then re-run only the shortlist
+with stricter settings.
+
+The heavier screen wrapper defaults remain available, but they are not the
+right default for high-throughput screening:
+
+- `10-12` directions
+- `6` coarse points plus `2` refine points
+- fresh QE relax
 - `12 A` supercell target
 
-Use that profile to rank dozens of materials, then re-run only the shortlist with stricter settings.
+That heavier profile was too slow for the InP pilot and should be treated as a
+refinement profile, not the first pass across a long list.
+
+## Validated HPG Runs
+
+Observed HiPerGator runs that inform the current recommendation:
+
+- `26704925_1` (`ed-screen`) failed after `00:11:01` because workspace and QE
+  scratch were being written under `~/LUMENS-PV`, which hit the home quota and
+  produced `OSError: [Errno 28] No space left on device`.
+- `26712884_1` reran the heavier screen profile with node-local scratch and
+  avoided the storage failure, but it was still too slow: after about
+  `01:44:27` it was only partway through `In_s0`, so it was canceled.
+- `26718600_1` validated the fast-screen profile and completed successfully in
+  `00:29:40`.
+
+Hardware allocation for the successful fast pilot (`26718600_1`):
+
+- cluster: HiPerGator
+- partition: `hpg-default`
+- node count: `1`
+- node: `c0705a-s29`
+- CPUs: `32`
+- tasks: `32`
+- CPUs per task: `1`
+- memory: `192G`
+- walltime requested: `02:00:00`
+- elapsed: `00:29:40`
+
+Software/runtime details for that successful run:
+
+- QE module stack: `gcc/14.2.0 openmpi/5.0.7 espresso/7.3.1`
+- QE launcher: `mpirun`
+- Python: `/home/e.kolberg/local/dsi3/miniforge/envs/dsi3_full/bin/python3`
+- workspace and QE scratch: node-local `/scratch/local/...`
+- results directory:
+  `calculating_energy_threshold_displacement/screen_outputs_fast_pilot_inp/`
+
+Validated InP fast-pilot settings and outcome (`JVASP-1183`):
+
+- structure source: `jarvis_relaxed_input+idealized`
+- fresh QE relax skipped
+- supercell repeats: `(2, 2, 2)` -> `16` atoms
+- primitive k-points: `[16, 16, 16]`
+- Ed k-points: gamma-only (`[1, 1, 1]`)
+- directions: `4` (`fibonacci`)
+- Ed mode: `static`
+- site sampling: `representative` (`2` sites)
+- reported Ed values:
+  - `In = 8.088 eV`
+  - `P = 7.66 eV`
 
 ## Supercomputer
 
