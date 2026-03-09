@@ -132,6 +132,7 @@ CMD=(
   --workspace "$WORKSPACE"
   --nprocs "$NPROCS"
   --results-dir "$RESULTS_DIR"
+  --skip-aggregate-outputs
   --qe-executable "$QE_EXECUTABLE"
   --pseudo-dir "$PSEUDO_DIR"
   "${DEFAULT_ARGS[@]}"

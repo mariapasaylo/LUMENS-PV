@@ -135,6 +135,11 @@ def parse_args() -> argparse.Namespace:
         help="Directory for per-material summaries and aggregate batch outputs.",
     )
     parser.add_argument(
+        "--skip-aggregate-outputs",
+        action="store_true",
+        help="Write per-material summary JSON files only. Recommended for Slurm array tasks that share a results directory.",
+    )
+    parser.add_argument(
         "--pseudo-dir",
         default="/usr/share/espresso/pseudo",
         help="Quantum ESPRESSO pseudopotential directory.",
@@ -1987,11 +1992,14 @@ def main() -> int:
             json.dump(summary, handle, indent=2)
         print(f"  Wrote {summary_path}")
 
-    write_aggregate_outputs(results_dir, summaries)
     print(f"\nCompleted {len(summaries)} material(s) with {failures} failure(s).")
-    print(f"Aggregate CSV: {results_dir / 'ed_results.csv'}")
-    print(f"Site CSV: {results_dir / 'ed_site_results.csv'}")
-    print(f"Batch summary: {results_dir / 'ed_batch_summary.json'}")
+    if args.skip_aggregate_outputs:
+        print("Skipped aggregate CSV generation (--skip-aggregate-outputs).")
+    else:
+        write_aggregate_outputs(results_dir, summaries)
+        print(f"Aggregate CSV: {results_dir / 'ed_results.csv'}")
+        print(f"Site CSV: {results_dir / 'ed_site_results.csv'}")
+        print(f"Batch summary: {results_dir / 'ed_batch_summary.json'}")
     return 1 if failures else 0
 
 

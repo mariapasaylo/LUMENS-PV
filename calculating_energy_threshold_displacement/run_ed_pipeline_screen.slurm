@@ -75,6 +75,7 @@ CMD=(
   --formula "$FORMULA"
   --workspace "$WORKSPACE"
   --results-dir "$RESULTS_DIR"
+  --skip-aggregate-outputs
   --pseudo-dir "$PSEUDO_DIR"
   --qe-executable pw.x
   --nprocs "${SLURM_NTASKS:-32}"

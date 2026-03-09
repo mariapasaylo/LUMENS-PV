@@ -1,5 +1,6 @@
 import csv
 import importlib.util
+import json
 import os
 import subprocess
 import sys
@@ -13,6 +14,8 @@ from unittest import mock
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PIPELINE_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline.py"
 SLURM_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline.slurm"
+SCREEN_SLURM_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline_screen.slurm"
+AGGREGATOR_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "aggregate_ed_results.py"
 HIGH_ACCURACY_CSV = REPO_ROOT / "calculating_energy_threshold_displacement" / "high_accuracy_materials.csv"
 
 
@@ -437,6 +440,7 @@ class TestSlurmWrapper(unittest.TestCase):
         self.assertIn("Running:", completed.stdout)
         self.assertIn("--formula BSb", completed.stdout)
         self.assertIn("--material-id JVASP-133843", completed.stdout)
+        self.assertIn("--skip-aggregate-outputs", completed.stdout)
         self.assertIn("--qe-launcher mpirun", completed.stdout)
         self.assertIn("--ed-kpoint-mode auto", completed.stdout)
         self.assertIn("--idealize-relaxed-structure", completed.stdout)
@@ -444,6 +448,111 @@ class TestSlurmWrapper(unittest.TestCase):
         self.assertIn("--spin-mode auto", completed.stdout)
         self.assertIn("--occupations-mode auto", completed.stdout)
         self.assertIn("--supercell-min-length 16.0", completed.stdout)
+
+    def test_screen_wrapper_skips_per_task_aggregate_outputs(self):
+        text = SCREEN_SLURM_PATH.read_text(encoding="utf-8")
+        self.assertIn("--skip-aggregate-outputs", text)
+
+
+class TestAggregateEdResults(unittest.TestCase):
+    def test_aggregator_rebuilds_csvs_from_per_material_summaries(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            results_dir = Path(tmpdir) / "results"
+            results_dir.mkdir()
+
+            ok_summary = {
+                "formula": "InP",
+                "material_id": "JVASP-1183",
+                "status": "ok",
+                "structure_source": "jarvis_relaxed_input+idealized",
+                "ed_mode": "static",
+                "element_aggregates_eV": {
+                    "In": {
+                        "recommended_single_value_eV": 8.088,
+                        "aggregation_mode": "min",
+                        "weighted_mean_eV": 8.088,
+                        "minimum_eV": 8.088,
+                        "maximum_eV": 8.088,
+                        "inequivalent_site_count": 1,
+                    },
+                    "P": {
+                        "recommended_single_value_eV": 7.66,
+                        "aggregation_mode": "min",
+                        "weighted_mean_eV": 7.66,
+                        "minimum_eV": 7.66,
+                        "maximum_eV": 7.66,
+                        "inequivalent_site_count": 1,
+                    },
+                },
+                "site_results": [
+                    {
+                        "element": "In",
+                        "site_label": "In_s0",
+                        "ed_eV": 8.088,
+                        "multiplicity": 4,
+                        "best_direction": "dir_000",
+                        "best_distance_angstrom": 0.40,
+                        "status": "ok",
+                    },
+                    {
+                        "element": "P",
+                        "site_label": "P_s0",
+                        "ed_eV": 7.66,
+                        "multiplicity": 4,
+                        "best_direction": "dir_001",
+                        "best_distance_angstrom": 0.35,
+                        "status": "ok",
+                    },
+                ],
+            }
+            failed_summary = {
+                "formula": "GaSb",
+                "material_id": "JVASP-1177",
+                "status": "failed",
+                "ed_mode": "static",
+                "error": "SCF did not converge",
+            }
+
+            (results_dir / "GaSb_JVASP-1177_summary.json").write_text(
+                json.dumps(failed_summary),
+                encoding="utf-8",
+            )
+            (results_dir / "InP_JVASP-1183_summary.json").write_text(
+                json.dumps(ok_summary),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.run(
+                [sys.executable, str(AGGREGATOR_PATH), "--results-dir", str(results_dir)],
+                cwd=REPO_ROOT,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 0, msg=completed.stdout)
+            self.assertIn("Loaded 2 material summaries", completed.stdout)
+
+            with (results_dir / "ed_results.csv").open("r", encoding="utf-8", newline="") as handle:
+                element_rows = list(csv.DictReader(handle))
+            with (results_dir / "ed_site_results.csv").open("r", encoding="utf-8", newline="") as handle:
+                site_rows = list(csv.DictReader(handle))
+            batch_summary = json.loads((results_dir / "ed_batch_summary.json").read_text(encoding="utf-8"))
+
+            self.assertEqual(len(element_rows), 3)
+            self.assertEqual(len(site_rows), 2)
+            self.assertEqual(batch_summary["total_requests"], 2)
+            self.assertEqual(batch_summary["successful_materials"], 1)
+            self.assertEqual(batch_summary["failed_materials"], 1)
+            self.assertEqual(
+                {(row["formula"], row["element"], row["status"]) for row in element_rows},
+                {
+                    ("GaSb", "", "failed"),
+                    ("InP", "In", "ok"),
+                    ("InP", "P", "ok"),
+                },
+            )
 
 
 if __name__ == "__main__":

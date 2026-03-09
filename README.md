@@ -15,8 +15,11 @@ The default workflow is accuracy-first:
 6. use pinned-atom relaxes by default,
 7. write site-resolved and per-element `Ed` outputs.
 
-Batch input can come from `calculating_energy_threshold_displacement/candidate_materials.csv`
-or any CSV/text file with formulas.
+For screening runs, the canonical batch input is
+`calculating_energy_threshold_displacement/materials_screen_batch.csv`, a
+deduped list pinned to specific JARVIS material ids. The runner also accepts
+custom CSV/text files, but a formula-only file can auto-select the
+lowest-`ehull` JARVIS match when a formula is ambiguous.
 
 ## Batch Usage
 
@@ -33,9 +36,15 @@ Batch file:
 ```bash
 /home/vm/miniconda3/envs/DSI/bin/python \
   /home/vm/LUMENS-PV/calculating_energy_threshold_displacement/run_ed_pipeline.py \
-  --input-file /home/vm/LUMENS-PV/calculating_energy_threshold_displacement/candidate_materials.csv \
+  --input-file /home/vm/LUMENS-PV/calculating_energy_threshold_displacement/materials_screen_batch.csv \
   --max-materials 10
 ```
+
+Pinned screening list:
+
+- `materials_screen_batch.csv`: default many-material screening list, pinned to
+  `formula,material_id`
+- `high_accuracy_materials.csv`: small refinement shortlist for stricter reruns
 
 Outputs go to `calculating_energy_threshold_displacement/ed_outputs/`:
 
@@ -43,6 +52,24 @@ Outputs go to `calculating_energy_threshold_displacement/ed_outputs/`:
 - `ed_results.csv` with one row per material-element pair
 - `ed_site_results.csv` with site-resolved `Ed` values
 - `ed_batch_summary.json` with overall batch status
+
+For Slurm arrays that share one `RESULTS_DIR`, treat the per-material
+`*_summary.json` files as the source of truth and rebuild the combined CSVs
+after the array completes:
+
+```bash
+/home/vm/miniconda3/envs/DSI/bin/python \
+  /home/vm/LUMENS-PV/calculating_energy_threshold_displacement/aggregate_ed_results.py \
+  --results-dir /path/to/shared_results_dir
+```
+
+During an active array run, the persistent outputs are:
+
+- one `*_summary.json` per finished material in `RESULTS_DIR`
+- Slurm logs under `calculating_energy_threshold_displacement/logs/`
+
+The shared aggregate CSVs become authoritative only after the collector step
+finishes. Node-local QE scratch is temporary and is deleted at job exit.
 
 ## Recommended Profiles
 
@@ -63,6 +90,24 @@ sbatch --array=1-N run_ed_pipeline_screen.slurm /path/to/materials.csv \
   --skip-qe-relax --force-qe
 ```
 
+For the current medium-throughput HiPerGator screening target, use the pinned
+screening CSV and a modest sampling increase over the `00:29:40` InP pilot:
+
+```bash
+cd /path/to/LUMENS-PV/calculating_energy_threshold_displacement
+RESULTS_DIR=/path/to/screen_outputs_mid \
+PSEUDO_DIR=/path/to/pseudopotentials_psl_pbe_full \
+ED_DIRECTIONS=6 \
+ED_POINTS=5 \
+REFINE_POINTS=0 \
+SUPERCELL_MIN_LENGTH=8.0 \
+ED_CUTOFF_SCALE=1.00 \
+ED_TIMEOUT=900 \
+sbatch --array=1-70%10 run_ed_pipeline_screen.slurm \
+  /path/to/LUMENS-PV/calculating_energy_threshold_displacement/materials_screen_batch.csv \
+  --skip-qe-relax --force-qe
+```
+
 This validated fast-screen profile is the current recommended starting point for
 dozens of materials:
 
@@ -79,6 +124,13 @@ dozens of materials:
 
 Use that profile to rank many materials cheaply, then re-run only the shortlist
 with stricter settings.
+
+If you want to stretch the validated `00:29:40` InP fast pilot toward roughly
+`00:40:00-01:00:00`, increase sampling before touching the supercell or k-point
+model. The safest next step is usually `ED_DIRECTIONS=6` with the same
+`8.0 A`/gamma/static/skip-relax profile. If that still runs too fast, try
+`ED_POINTS=5` or `REFINE_POINTS=1`. Avoid jumping straight to the `12 A`
+screening defaults; that profile was already too slow on InP.
 
 The heavier screen wrapper defaults remain available, but they are not the
 right default for high-throughput screening:
@@ -151,6 +203,19 @@ sbatch --array=1-5 run_ed_pipeline.slurm /path/to/LUMENS-PV/calculating_energy_t
 ```
 
 Update the `#SBATCH` resources in `run_ed_pipeline.slurm` for your cluster. The array index should match the number of data rows in the CSV, excluding the header.
+
+After a shared-results Slurm array completes, rebuild the combined CSV outputs
+from the per-material JSON summaries:
+
+```bash
+/home/e.kolberg/local/dsi3/miniforge/envs/dsi3_full/bin/python3 \
+  /path/to/LUMENS-PV/calculating_energy_threshold_displacement/aggregate_ed_results.py \
+  --results-dir /path/to/shared_results_dir
+```
+
+For full-batch screening on HiPerGator, make sure `PSEUDO_DIR` points to a
+directory that covers every element in the batch. The run will fail fast on a
+material if any required `.UPF` file is missing.
 
 If you want a faster, lower-fidelity smoke test instead of the default high-accuracy workflow:
 
