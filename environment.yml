@@ -1,0 +1,11 @@
+name: lumens-ed
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=1.26.4
+  - spglib=2.7.0
+  - ase=3.27.0
+  - pip
+  - pip:
+      - jarvis-tools==2026.1.10
