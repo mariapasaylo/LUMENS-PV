@@ -18,6 +18,11 @@ precision vs compute-cost tradeoffs.
   - `~/` was full (`40G used / 40G total`) when the first bounded screen run was attempted.
   - If `workspace` and `results-dir` stay under `~/LUMENS-PV`, Ed runs can fail with `Errno 28: No space left on device`.
   - Use a filesystem with enough free quota for QE scratch, input, output, and JSON/CSV summaries.
+  - The main space consumer is QE scratch under `tmp/`, not the human-readable logs.
+  - Example from the bounded screen pilot:
+    - `relax/tmp` grew to about `1.7G`
+    - `ed/tmp` grew to about `316M`
+    - many per-rank `JVASP-1183.wfc*` files were about `25-27M` each
 - GPU status:
   - Current production path is CPU-only.
   - Loading NVHPC-based `espresso` modules still resolved to a CPU `pw.x` binary on this system.
