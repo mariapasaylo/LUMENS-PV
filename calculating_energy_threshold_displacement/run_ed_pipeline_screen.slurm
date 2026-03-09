@@ -16,7 +16,16 @@ CODE_ROOT="${CODE_ROOT:-$HOME/LUMENS-PV}"
 PYTHON_BIN="${PYTHON_BIN:-$HOME/local/dsi3/miniforge/envs/dsi3_full/bin/python3}"
 RUNNER="$CODE_ROOT/calculating_energy_threshold_displacement/run_ed_pipeline.py"
 RESULTS_DIR="${RESULTS_DIR:-$CODE_ROOT/calculating_energy_threshold_displacement/screen_outputs}"
-WORKSPACE="${WORKSPACE:-$CODE_ROOT/calculating_energy_threshold_displacement/screen_workspace}"
+if [[ -n "${SLURM_TMPDIR:-}" ]]; then
+  DEFAULT_JOB_LOCAL_SCRATCH="$SLURM_TMPDIR/lumens-ed-${SLURM_JOB_ID:-$$}"
+elif [[ -d /scratch/local ]]; then
+  DEFAULT_JOB_LOCAL_SCRATCH="/scratch/local/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+else
+  DEFAULT_JOB_LOCAL_SCRATCH="${TMPDIR:-/tmp}/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+fi
+JOB_LOCAL_SCRATCH="${JOB_LOCAL_SCRATCH:-$DEFAULT_JOB_LOCAL_SCRATCH}"
+WORKSPACE="${WORKSPACE:-$JOB_LOCAL_SCRATCH/workspace}"
+QE_SCRATCH_ROOT="${QE_SCRATCH_ROOT:-$JOB_LOCAL_SCRATCH/qe}"
 PSEUDO_DIR="${PSEUDO_DIR:-$CODE_ROOT/pseudopotentials}"
 TASK_ID="${SLURM_ARRAY_TASK_ID:?SLURM_ARRAY_TASK_ID is required}"
 
@@ -26,8 +35,10 @@ module load gcc/14.2.0 openmpi/5.0.7 espresso/7.3.1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
 export PYTHONUNBUFFERED=1
+export QE_SCRATCH_ROOT
+trap 'rm -rf "$JOB_LOCAL_SCRATCH"' EXIT
 
-mkdir -p logs "$RESULTS_DIR" "$WORKSPACE"
+mkdir -p logs "$RESULTS_DIR" "$WORKSPACE" "$QE_SCRATCH_ROOT"
 
 mapfile -t MATERIAL_SPEC < <(
   "$PYTHON_BIN" - <<'PY' "$INPUT_FILE" "$TASK_ID"

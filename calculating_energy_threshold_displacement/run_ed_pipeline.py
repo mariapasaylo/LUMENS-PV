@@ -140,6 +140,16 @@ def parse_args() -> argparse.Namespace:
         help="Quantum ESPRESSO pseudopotential directory.",
     )
     parser.add_argument("--qe-executable", default=shutil.which("pw.x") or "pw.x")
+    parser.add_argument(
+        "--qe-scratch-root",
+        default=os.environ.get("QE_SCRATCH_ROOT") or os.environ.get("SLURM_TMPDIR"),
+        help="Optional root directory for QE scratch/outdir. Defaults to $QE_SCRATCH_ROOT or $SLURM_TMPDIR when set.",
+    )
+    parser.add_argument(
+        "--keep-qe-scratch",
+        action="store_true",
+        help="Preserve QE scratch directories instead of deleting them after each run.",
+    )
     parser.add_argument("--relax-timeout", type=int, default=21600)
     parser.add_argument("--ed-timeout", type=int, default=10800)
     parser.add_argument(
@@ -633,6 +643,36 @@ def build_qe_command(qe_executable: str, input_name: str, nprocs: int, qe_launch
     raise RuntimeError(f"Unsupported qe-launcher '{qe_launcher}'.")
 
 
+def get_qe_scratch_dir(run_dir: Path, tag: str, qe_scratch_root: str | None) -> Path:
+    if not qe_scratch_root:
+        return run_dir / "tmp"
+
+    scratch_root = Path(qe_scratch_root).expanduser()
+    scratch_stub = sanitize_stub(f"{run_dir.parent.name}_{run_dir.name}_{tag}")
+    return scratch_root / scratch_stub
+
+
+def configure_qe_input_for_scratch(input_text: str, scratch_dir: Path) -> str:
+    scratch_path = scratch_dir.as_posix()
+    lines: list[str] = []
+    found_outdir = False
+    has_wfcdir = any(re.match(r"\s*wfcdir\s*=", line) for line in input_text.splitlines())
+
+    for line in input_text.splitlines(keepends=True):
+        if re.match(r"\s*outdir\s*=", line):
+            indent = re.match(r"(\s*)", line).group(1) if re.match(r"(\s*)", line) else "  "
+            lines.append(f"{indent}outdir='{scratch_path}'\n")
+            if not has_wfcdir:
+                lines.append(f"{indent}wfcdir='{scratch_path}'\n")
+            found_outdir = True
+            continue
+        lines.append(line)
+
+    if not found_outdir:
+        return input_text
+    return "".join(lines)
+
+
 def run_qe(
     input_text: str,
     run_dir: Path,
@@ -642,11 +682,13 @@ def run_qe(
     nprocs: int,
     qe_launcher: str,
     force_qe: bool,
+    qe_scratch_root: str | None = None,
+    keep_qe_scratch: bool = False,
 ) -> str:
     run_dir.mkdir(parents=True, exist_ok=True)
-    (run_dir / "tmp").mkdir(exist_ok=True)
     input_path = run_dir / f"{tag}.in"
     output_path = run_dir / f"{tag}.out"
+    runtime_input_path = run_dir / f"{tag}.run.in"
     crash_path = run_dir / "CRASH"
     if not force_qe and input_path.exists() and output_path.exists():
         existing_input = input_path.read_text(encoding="utf-8")
@@ -657,23 +699,36 @@ def run_qe(
     if crash_path.exists():
         crash_path.unlink()
 
-    cmd = build_qe_command(qe_executable, input_path.name, nprocs, qe_launcher)
+    scratch_dir = get_qe_scratch_dir(run_dir, tag, qe_scratch_root)
+    if qe_scratch_root:
+        scratch_dir.mkdir(parents=True, exist_ok=True)
+        runtime_input_text = configure_qe_input_for_scratch(input_text, scratch_dir)
+        runtime_input_path.write_text(runtime_input_text, encoding="utf-8")
+        qe_input_name = runtime_input_path.name
+    else:
+        scratch_dir.mkdir(exist_ok=True)
+        qe_input_name = input_path.name
+    cmd = build_qe_command(qe_executable, qe_input_name, nprocs, qe_launcher)
 
-    completed = subprocess.run(
-        cmd,
-        cwd=run_dir,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        timeout=timeout,
-        check=False,
-    )
-    output_path.write_text(completed.stdout, encoding="utf-8")
-    if completed.returncode != 0:
-        raise RuntimeError(f"QE failed for {tag} with code {completed.returncode}. See {output_path}.")
-    if "JOB DONE" not in completed.stdout:
-        raise RuntimeError(f"QE did not complete successfully for {tag}. See {output_path}.")
-    return completed.stdout
+    try:
+        completed = subprocess.run(
+            cmd,
+            cwd=run_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+        output_path.write_text(completed.stdout, encoding="utf-8")
+        if completed.returncode != 0:
+            raise RuntimeError(f"QE failed for {tag} with code {completed.returncode}. See {output_path}.")
+        if "JOB DONE" not in completed.stdout:
+            raise RuntimeError(f"QE did not complete successfully for {tag}. See {output_path}.")
+        return completed.stdout
+    finally:
+        if qe_scratch_root and not keep_qe_scratch:
+            shutil.rmtree(scratch_dir, ignore_errors=True)
 
 
 def parse_total_energy_ry(output_text: str, require_converged: bool = False) -> float:
@@ -1248,6 +1303,8 @@ def evaluate_displacement(
         args.nprocs,
         args.qe_launcher,
         args.force_qe,
+        args.qe_scratch_root,
+        args.keep_qe_scratch,
     )
     return {
         "distance_angstrom": float(distance),
@@ -1499,6 +1556,8 @@ def prepare_relaxed_structure(
         args.nprocs,
         args.qe_launcher,
         args.force_qe,
+        args.qe_scratch_root,
+        args.keep_qe_scratch,
     )
     atoms_relaxed = parse_relaxed_structure(relax_output, base_atoms)
     write(relax_dir / f"{material_id}_relaxed.xyz", atoms_relaxed)
@@ -1666,6 +1725,8 @@ def process_material(
         args.nprocs,
         args.qe_launcher,
         args.force_qe,
+        args.qe_scratch_root,
+        args.keep_qe_scratch,
     )
     reference_energy = parse_total_energy_ry(reference_output)
 

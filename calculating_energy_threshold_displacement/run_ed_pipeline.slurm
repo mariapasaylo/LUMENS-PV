@@ -25,6 +25,16 @@ if [[ -z "$PYTHON_BIN" ]]; then
 fi
 RUNNER="$CODE_ROOT/calculating_energy_threshold_displacement/run_ed_pipeline.py"
 RESULTS_DIR="${RESULTS_DIR:-$CODE_ROOT/calculating_energy_threshold_displacement/ed_outputs}"
+if [[ -n "${SLURM_TMPDIR:-}" ]]; then
+  DEFAULT_JOB_LOCAL_SCRATCH="$SLURM_TMPDIR/lumens-ed-${SLURM_JOB_ID:-$$}"
+elif [[ -d /scratch/local ]]; then
+  DEFAULT_JOB_LOCAL_SCRATCH="/scratch/local/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+else
+  DEFAULT_JOB_LOCAL_SCRATCH="${TMPDIR:-/tmp}/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+fi
+JOB_LOCAL_SCRATCH="${JOB_LOCAL_SCRATCH:-$DEFAULT_JOB_LOCAL_SCRATCH}"
+WORKSPACE="${WORKSPACE:-$JOB_LOCAL_SCRATCH/workspace}"
+QE_SCRATCH_ROOT="${QE_SCRATCH_ROOT:-$JOB_LOCAL_SCRATCH/qe}"
 QE_EXECUTABLE="${QE_EXECUTABLE:-pw.x}"
 PSEUDO_DIR="${PSEUDO_DIR:-/usr/share/espresso/pseudo}"
 TASK_ID="${SLURM_ARRAY_TASK_ID:?SLURM_ARRAY_TASK_ID is required}"
@@ -81,8 +91,10 @@ esac
 
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
+export QE_SCRATCH_ROOT
+trap 'rm -rf "$JOB_LOCAL_SCRATCH"' EXIT
 
-mkdir -p logs "$RESULTS_DIR"
+mkdir -p logs "$RESULTS_DIR" "$WORKSPACE" "$QE_SCRATCH_ROOT"
 
 mapfile -t MATERIAL_SPEC < <(
   "$PYTHON_BIN" - <<'PY' "$INPUT_FILE" "$TASK_ID"
@@ -117,6 +129,7 @@ MATERIAL_ID="${MATERIAL_SPEC[1]}"
 CMD=(
   "$PYTHON_BIN" "$RUNNER"
   --formula "$FORMULA"
+  --workspace "$WORKSPACE"
   --nprocs "$NPROCS"
   --results-dir "$RESULTS_DIR"
   --qe-executable "$QE_EXECUTABLE"

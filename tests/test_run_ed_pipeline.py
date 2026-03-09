@@ -322,6 +322,40 @@ class TestQeLauncherSelection(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         self.assertFalse((run_dir / "CRASH").exists())
 
+    def test_run_qe_redirects_and_cleans_external_scratch(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            run_dir = root / "run"
+            scratch_root = root / "scratch"
+            input_text = "&CONTROL\n  outdir='./tmp'\n/\n"
+            expected_scratch = self.pipeline.get_qe_scratch_dir(run_dir, "test", str(scratch_root))
+
+            with mock.patch.object(
+                self.pipeline.shutil,
+                "which",
+                side_effect=lambda name: {"srun": None, "mpirun": None, "mpiexec": None}.get(name),
+            ), mock.patch.object(self.pipeline.subprocess, "run") as run_mock:
+                run_mock.return_value = SimpleNamespace(returncode=0, stdout="JOB DONE\n")
+                output_text = self.pipeline.run_qe(
+                    input_text,
+                    run_dir,
+                    "test",
+                    "pw.x",
+                    timeout=60,
+                    nprocs=1,
+                    qe_launcher="auto",
+                    force_qe=True,
+                    qe_scratch_root=str(scratch_root),
+                )
+
+            rendered_input = (run_dir / "test.run.in").read_text(encoding="utf-8")
+            self.assertEqual(output_text, "JOB DONE\n")
+            self.assertEqual(run_mock.call_args.args[0], ["pw.x", "-in", "test.run.in"])
+            self.assertIn(f"outdir='{expected_scratch.as_posix()}'", rendered_input)
+            self.assertIn(f"wfcdir='{expected_scratch.as_posix()}'", rendered_input)
+            self.assertEqual((run_dir / "test.in").read_text(encoding="utf-8"), input_text)
+            self.assertFalse(expected_scratch.exists())
+
 
 class TestQeEnergyParsing(unittest.TestCase):
     @classmethod
