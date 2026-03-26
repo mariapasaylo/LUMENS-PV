@@ -296,6 +296,14 @@ def parse_args() -> argparse.Namespace:
         help="Scale factor applied to the recommended QE cutoffs for both relax and Ed calculations.",
     )
     parser.add_argument(
+        "--ed-scan-max-scale",
+        type=float,
+        default=1.4,
+        help="Scale factor for the maximum displacement distance in the Ed scan: max_dist = scale * nn_distance. "
+             "Default 1.4 (= 1.4 x nearest-neighbor bond length). Increase to 2.0-2.5 when the barrier peak "
+             "is expected beyond 1.4 x nn (e.g. [100] channels in zinc-blende).",
+    )
+    parser.add_argument(
         "--occupations-mode",
         choices=["smearing", "fixed", "auto"],
         default="smearing",
@@ -1363,7 +1371,7 @@ def scan_site_ed(
     electronic_settings: dict,
 ) -> dict:
     nn_distance = nearest_neighbor_distance(supercell, atom_index)
-    coarse_distances = np.linspace(0.3, 1.4 * nn_distance, args.ed_points)
+    coarse_distances = np.linspace(0.3, args.ed_scan_max_scale * nn_distance, args.ed_points)
     print(
         f"    {site_group['label']} ({site_group['element']}): atom {atom_index}, "
         f"multiplicity {site_group['multiplicity']}, nn = {nn_distance:.2f} A"
