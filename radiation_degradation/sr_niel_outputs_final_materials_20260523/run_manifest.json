@@ -1,0 +1,266 @@
+{
+  "ed_input": "calculating_energy_threshold_displacement/screen_outputs_final_materials_stageA_gpu_l4_guaranteed_niel/results/niel_ed_inputs.csv",
+  "material_count": 62,
+  "generated_at_note": "Timestamp intentionally omitted for deterministic diffs; use file mtimes or SR-NIEL URLs for run provenance.",
+  "srniel": {
+    "electron_url": "https://www.sr-niel.org/index.php/sr-niel-web-calculators/niel-calculator-for-electrons-protons-and-ions/electrons-niel-calculator",
+    "proton_url": "https://www.sr-niel.org/index.php/sr-niel-web-calculators/niel-calculator-for-electrons-protons-and-ions/protons-ions-niel-calculator",
+    "electron_parameters": {
+      "FF": "0",
+      "TARGET": "0",
+      "Emin": 0.04,
+      "Emax": 100.0,
+      "Fluence": 1.0
+    },
+    "proton_parameters": {
+      "Zi": 1,
+      "Ionmodel": "1",
+      "Scale": "0",
+      "TARGET": "0",
+      "Emin": 0.0001,
+      "Emax": 10000.0,
+      "Fluence": 1.0
+    },
+    "default_leo_omere_spectrum": {
+      "description": "Repository OMERE 5.9 sample spectrum for 10-year circular 800 km, 98 deg LEO, AE8 Max electrons, AP8 Min protons, ESP 90% solar protons.",
+      "differential_fluence_units": "per MeV-cm2",
+      "electron": [
+        [
+          0.04,
+          1270000000000000.0
+        ],
+        [
+          0.1,
+          854000000000000.0
+        ],
+        [
+          0.25,
+          242000000000000.0
+        ],
+        [
+          0.5,
+          27600000000000.0
+        ],
+        [
+          0.75,
+          7430000000000.0
+        ],
+        [
+          1.0,
+          3320000000000.0
+        ],
+        [
+          1.5,
+          1260000000000.0
+        ],
+        [
+          2.0,
+          530000000000.0
+        ],
+        [
+          2.5,
+          259000000000.0
+        ],
+        [
+          3.0,
+          106000000000.0
+        ],
+        [
+          3.5,
+          42000000000.0
+        ],
+        [
+          4.0,
+          15700000000.0
+        ],
+        [
+          4.5,
+          5060000000.0
+        ],
+        [
+          5.0,
+          1470000000.0
+        ],
+        [
+          5.5,
+          339000000.0
+        ],
+        [
+          6.0,
+          54700000.0
+        ],
+        [
+          6.5,
+          8450000.0
+        ],
+        [
+          7.0,
+          644000.0
+        ]
+      ],
+      "proton": [
+        [
+          0.1,
+          16200000000000.0
+        ],
+        [
+          0.25,
+          4600000000000.0
+        ],
+        [
+          0.5,
+          1090000000000.0
+        ],
+        [
+          0.75,
+          407000000000.0
+        ],
+        [
+          1.0,
+          183000000000.0
+        ],
+        [
+          1.0,
+          283000000000.0
+        ],
+        [
+          2.0,
+          85200000000.0
+        ],
+        [
+          3.0,
+          47200000000.0
+        ],
+        [
+          4.0,
+          27000000000.0
+        ],
+        [
+          5.0,
+          17800000000.0
+        ],
+        [
+          6.0,
+          12800000000.0
+        ],
+        [
+          7.0,
+          9690000000.0
+        ],
+        [
+          8.0,
+          7700000000.0
+        ],
+        [
+          10.0,
+          5130000000.0
+        ],
+        [
+          12.0,
+          3710000000.0
+        ],
+        [
+          15.0,
+          2570000000.0
+        ],
+        [
+          17.0,
+          2050000000.0
+        ],
+        [
+          20.0,
+          1520000000.0
+        ],
+        [
+          25.0,
+          1020000000.0
+        ],
+        [
+          30.0,
+          771000000.0
+        ],
+        [
+          35.0,
+          612000000.0
+        ],
+        [
+          40.0,
+          517000000.0
+        ],
+        [
+          45.0,
+          448000000.0
+        ],
+        [
+          50.0,
+          400000000.0
+        ],
+        [
+          55.0,
+          364000000.0
+        ],
+        [
+          60.0,
+          337000000.0
+        ],
+        [
+          70.0,
+          290000000.0
+        ],
+        [
+          80.0,
+          255000000.0
+        ],
+        [
+          90.0,
+          226000000.0
+        ],
+        [
+          100.0,
+          203000000.0
+        ],
+        [
+          125.0,
+          153000000.0
+        ],
+        [
+          150.0,
+          115000000.0
+        ],
+        [
+          175.0,
+          87700000.0
+        ],
+        [
+          200.0,
+          67300000.0
+        ],
+        [
+          225.0,
+          50000000.0
+        ],
+        [
+          250.0,
+          38500000.0
+        ],
+        [
+          275.0,
+          30500000.0
+        ],
+        [
+          300.0,
+          24700000.0
+        ]
+      ]
+    }
+  },
+  "outputs": {
+    "srniel_result_links": "srniel_result_links.csv",
+    "omere_inputs": "omere_inputs/*.dat",
+    "omere_input_manifest": "omere_input_manifest.csv",
+    "srniel_curves": "srniel_curves.csv",
+    "srniel_screening_metrics": "srniel_screening_metrics.csv",
+    "eol_damage_screening_inputs": "eol_damage_screening_inputs.csv"
+  },
+  "eol_boundary": "These files provide SR-NIEL curves and OMERE-ready inputs. True OMERE solar-cell EOL requires running OMERE/TRAD with a mission, shielding, solar-cell degradation method, and material/cell degradation coefficients."
+}
