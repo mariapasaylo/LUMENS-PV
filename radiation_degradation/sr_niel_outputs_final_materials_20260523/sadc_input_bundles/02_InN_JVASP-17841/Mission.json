@@ -1,0 +1,28 @@
+{
+  "segments": [
+    {
+      "name": "LEO 10yrs",
+      "sources": [
+        {
+          "particle": "electrons",
+          "path": "samples/Missions data/electrons/trappedElectrons_LEOPOL_AE8.flx",
+          "unit": "MeV-1.cm-2.s-1",
+          "error%": 5,
+          "transported": false
+        },
+        {
+          "particle": "protons",
+          "path": "samples/Missions data/protons/trappedProtons_LEO.flx",
+          "unit": "MeV-1.cm-2.s-1",
+          "error%": 5,
+          "transported": false
+        }
+      ],
+      "duration": {
+        "value": 10.0,
+        "unit": "years"
+      }
+    }
+  ],
+  "start_date": 1735732800
+}

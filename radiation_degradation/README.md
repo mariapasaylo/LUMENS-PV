@@ -54,6 +54,22 @@ The run uses these SR-NIEL parameters:
   official SR-NIEL curves. These are not OMERE EOL values.
 - `eol_damage_screening_inputs.csv`: explicit queue of rows that still require
   OMERE or material-specific degradation coefficients.
+- `sadc_input_bundles/`: one SADC-ready `Cell.json`/`Mission.json` bundle per
+  material, plus copied official SR-NIEL curves and a run manifest.
+
+## Building SADC Input Bundles
+
+Run from the repository root after downloading the JARVIS-DFT 3D dataset JSON:
+
+```bash
+python radiation_degradation/build_sadc_input_bundles.py \
+  --srniel-dir radiation_degradation/sr_niel_outputs_final_materials_20260523 \
+  --jarvis-json /path/to/jdft_3d-12-12-2022.unzipped.json
+```
+
+This does not compute OMERE EOL by itself. It creates reproducible SADC inputs
+so a real `SADC.exe` command-line binary can process the 62 materials without
+manual GUI import.
 
 ## OMERE Boundary
 
@@ -61,6 +77,8 @@ OMERE is required for publishable solar-cell degradation/EOL results because it
 combines mission environment, shielding/transport, displacement damage, and the
 solar-cell degradation model or coefficients. The SR-NIEL files here are ready
 inputs to that step, but the repository does not include the OMERE executable.
+
+See `OMERE_CLI_STATUS.md` for the current non-GUI execution status.
 
 The official TRAD download currently routes through a form and the TRAD license
 does not permit redistribution. Do not replace OMERE with local LLM-generated

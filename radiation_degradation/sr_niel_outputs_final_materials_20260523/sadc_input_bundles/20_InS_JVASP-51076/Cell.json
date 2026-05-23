@@ -1,0 +1,225 @@
+{
+  "layers": [
+    {
+      "name": "coverglass",
+      "type": "optical",
+      "family": "glass",
+      "thickness": {
+        "value": 150.0,
+        "unit": "um"
+      },
+      "density": 2.61,
+      "formula": "SiO2",
+      "transmission": {
+        "path": "optical loss/Optical_loss_table - clear.dat",
+        "error%": 0.0
+      }
+    },
+    {
+      "name": "Adhesive",
+      "type": "optical",
+      "family": "silicones",
+      "thickness": {
+        "value": 20.0,
+        "unit": "um"
+      },
+      "density": 1.03,
+      "formula": "SiOC2H6",
+      "transmission": {
+        "path": "optical loss/Optical_loss_table - clear.dat",
+        "error%": 0.0
+      },
+      "electronTID": {
+        "path": "config/optical_loss/TID_Table_DC93-500.dat"
+      }
+    },
+    {
+      "name": "InS",
+      "type": "active",
+      "family": "semiconductors",
+      "thickness": {
+        "value": 2.0,
+        "unit": "um"
+      },
+      "density": 5.013,
+      "lambdaFrom_nm": 750,
+      "lambdaTo_nm": 900,
+      "protonNiel": "niel/proton_NIEL.dat",
+      "electronNiel": "niel/electron_NIEL.dat",
+      "electricalParams": [
+        {
+          "name": "Isc",
+          "type": "ISC",
+          "A": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ne": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Np": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ce": {
+            "value": 0.948,
+            "error%": 0.0
+          },
+          "Cp": {
+            "value": 0.948,
+            "error%": 0.0
+          },
+          "DxE": {
+            "value": 135000000000.0,
+            "error%": 0.0
+          },
+          "DxP": {
+            "value": 135000000000.0,
+            "error%": 0.0
+          }
+        },
+        {
+          "name": "Voc",
+          "type": "VOC",
+          "A": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ne": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Np": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ce": {
+            "value": 0.058,
+            "error%": 0.0
+          },
+          "Cp": {
+            "value": 0.058,
+            "error%": 0.0
+          },
+          "DxE": {
+            "value": 444000000.0,
+            "error%": 0.0
+          },
+          "DxP": {
+            "value": 205000000.0,
+            "error%": 0.0
+          }
+        },
+        {
+          "name": "Pmax",
+          "type": "PMAX",
+          "A": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ne": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Np": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ce": {
+            "value": 0.306,
+            "error%": 0.0
+          },
+          "Cp": {
+            "value": 0.306,
+            "error%": 0.0
+          },
+          "DxE": {
+            "value": 6720000000.0,
+            "error%": 0.0
+          },
+          "DxP": {
+            "value": 3630000000.0,
+            "error%": 0.0
+          }
+        },
+        {
+          "name": "Ipm",
+          "type": "IPM",
+          "A": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ne": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Np": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ce": {
+            "value": 0.703,
+            "error%": 0.0
+          },
+          "Cp": {
+            "value": 0.703,
+            "error%": 0.0
+          },
+          "DxE": {
+            "value": 68400000000.0,
+            "error%": 0.0
+          },
+          "DxP": {
+            "value": 68400000000.0,
+            "error%": 0.0
+          }
+        },
+        {
+          "name": "Vpm",
+          "type": "VPM",
+          "A": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ne": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Np": {
+            "value": 1.0,
+            "error%": 0.0
+          },
+          "Ce": {
+            "value": 0.062,
+            "error%": 0.0
+          },
+          "Cp": {
+            "value": 0.062,
+            "error%": 0.0
+          },
+          "DxE": {
+            "value": 623000000.0,
+            "error%": 0.0
+          },
+          "DxP": {
+            "value": 123000000.0,
+            "error%": 0.0
+          }
+        }
+      ],
+      "formula": "InS"
+    },
+    {
+      "name": "Aluminium back side",
+      "type": "none",
+      "family": "lightMetals",
+      "thickness": {
+        "value": 6000.0,
+        "unit": "um"
+      },
+      "density": 2.7,
+      "formula": "Al2"
+    }
+  ]
+}
