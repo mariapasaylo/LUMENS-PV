@@ -1,0 +1,188 @@
+batch_start=2026-05-23T10:36:45.5330887-04:00 start_rank=1 end_rank=62
+rank_start rank=1 time=2026-05-23T10:36:45.6088144-04:00
+rank_done rank=1 status=completed_validated formula=SbIrS seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_103646
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=3540
+rank_start rank=2 time=2026-05-23T10:38:22.2325654-04:00
+rank_done rank=2 status=completed_validated formula=InN seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_103822
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=6488
+rank_start rank=3 time=2026-05-23T10:39:59.3805616-04:00
+rank_done rank=3 status=completed_validated formula=Hg3Cl2O2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104000
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=9167
+rank_start rank=4 time=2026-05-23T10:41:36.2487415-04:00
+rank_done rank=4 status=completed_validated formula=PbS seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104137
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=11809
+rank_start rank=5 time=2026-05-23T10:43:13.2615579-04:00
+rank_done rank=5 status=completed_validated formula=Ag2Te seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104314
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=14470
+rank_start rank=6 time=2026-05-23T10:44:50.1418041-04:00
+rank_done rank=6 status=completed_validated formula=PtI2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104450
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=17112
+rank_start rank=7 time=2026-05-23T10:46:27.2879820-04:00
+rank_done rank=7 status=completed_validated formula=NbBi3O7 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104628
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=19787
+rank_start rank=8 time=2026-05-23T10:48:03.7204878-04:00
+rank_done rank=8 status=completed_validated formula=ZnBi2O5 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104804
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=22440
+rank_start rank=9 time=2026-05-23T10:49:40.8975753-04:00
+rank_done rank=9 status=completed_validated formula=Ag3SI seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_104941
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=25085
+rank_start rank=10 time=2026-05-23T10:51:17.4885317-04:00
+rank_done rank=10 status=completed_validated formula=AlBiO3 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105118
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=27755
+rank_start rank=11 time=2026-05-23T10:52:54.6060492-04:00
+rank_done rank=11 status=completed_validated formula=CuAs2Pb6Cl7O6 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105255
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=30458
+rank_start rank=12 time=2026-05-23T10:54:31.8631627-04:00
+rank_done rank=12 status=completed_validated formula=Ta2Te4Br10O seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105432
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=33154
+rank_start rank=13 time=2026-05-23T10:56:08.4121668-04:00
+rank_done rank=13 status=completed_validated formula=Cd2GaAgSe4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105609
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=35856
+rank_start rank=14 time=2026-05-23T10:57:45.2277505-04:00
+rank_done rank=14 status=completed_validated formula=Na2WO4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105745
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=38515
+rank_start rank=15 time=2026-05-23T10:59:22.1141603-04:00
+rank_done rank=15 status=completed_validated formula=AlInSb2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_105922
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=41180
+rank_start rank=16 time=2026-05-23T11:00:59.4654439-04:00
+rank_done rank=16 status=completed_validated formula=SrTaNO2 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110100
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=43851
+rank_start rank=17 time=2026-05-23T11:02:36.4861197-04:00
+rank_done rank=17 status=completed_validated formula=HfS3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110237
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=46495
+rank_start rank=18 time=2026-05-23T11:04:13.3900336-04:00
+rank_done rank=18 status=completed_validated formula=HgSO4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110414
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=49143
+rank_start rank=19 time=2026-05-23T11:05:50.4389513-04:00
+rank_done rank=19 status=completed_validated formula=InAgS2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110551
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=51798
+rank_start rank=20 time=2026-05-23T11:07:27.7229329-04:00
+rank_done rank=20 status=completed_validated formula=InS seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110728
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=54433
+rank_start rank=21 time=2026-05-23T11:09:04.7208402-04:00
+rank_done rank=21 status=completed_validated formula=BaAlSi seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_110905
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=57088
+rank_start rank=22 time=2026-05-23T11:10:41.9918978-04:00
+rank_done rank=22 status=completed_validated formula=GaAgTeSe seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111042
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=59768
+rank_start rank=23 time=2026-05-23T11:12:19.3301971-04:00
+rank_done rank=23 status=completed_validated formula=Ag3PO4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111220
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=62422
+rank_start rank=24 time=2026-05-23T11:13:56.0606728-04:00
+rank_done rank=24 status=completed_validated formula=SrZrS3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111356
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=65090
+rank_start rank=25 time=2026-05-23T11:15:33.1461432-04:00
+rank_done rank=25 status=completed_validated formula=P2Se5 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111533
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=67739
+rank_start rank=26 time=2026-05-23T11:17:10.0860424-04:00
+rank_done rank=26 status=completed_validated formula=Rb2As3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111710
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=70399
+rank_start rank=27 time=2026-05-23T11:18:47.0693581-04:00
+rank_done rank=27 status=completed_validated formula=ScS seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_111847
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=73037
+rank_start rank=28 time=2026-05-23T11:20:24.1906811-04:00
+rank_done rank=28 status=completed_validated formula=BaH2O4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112024
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=75692
+rank_start rank=29 time=2026-05-23T11:22:01.0343162-04:00
+rank_done rank=29 status=completed_validated formula=GaAgP2Se6 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112201
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=78366
+rank_start rank=30 time=2026-05-23T11:23:38.3331076-04:00
+rank_done rank=30 status=completed_validated formula=Ca3SnH2 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112339
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=81038
+rank_start rank=31 time=2026-05-23T11:25:15.5244415-04:00
+rank_done rank=31 status=completed_validated formula=Ga3BN4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112516
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=83691
+rank_start rank=32 time=2026-05-23T11:26:52.6373853-04:00
+rank_done rank=32 status=completed_validated formula=Cu2SnSe3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112653
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=86373
+rank_start rank=33 time=2026-05-23T11:28:29.6527350-04:00
+rank_done rank=33 status=completed_validated formula=ScMo3O8 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_112830
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=89034
+rank_start rank=34 time=2026-05-23T11:30:06.9583244-04:00
+rank_done rank=34 status=completed_validated formula=CaSnS3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113007
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=91684
+rank_start rank=35 time=2026-05-23T11:31:44.3887811-04:00
+rank_done rank=35 status=completed_validated formula=ZnGeN2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113145
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=94351
+rank_start rank=36 time=2026-05-23T11:33:22.0053478-04:00
+rank_done rank=36 status=completed_validated formula=ZnS seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113322
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=96987
+rank_start rank=37 time=2026-05-23T11:34:59.8345204-04:00
+rank_done rank=37 status=completed_validated formula=MgCu2O4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113500
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=99640
+rank_start rank=38 time=2026-05-23T11:36:37.3416658-04:00
+rank_done rank=38 status=completed_validated formula=MoH2O4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113638
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=102291
+rank_start rank=39 time=2026-05-23T11:38:15.0174056-04:00
+rank_done rank=39 status=completed_validated formula=KP seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113815
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=104927
+rank_start rank=40 time=2026-05-23T11:39:52.9407813-04:00
+rank_done rank=40 status=completed_validated formula=MgCu2O4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_113953
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=107570
+rank_start rank=41 time=2026-05-23T11:41:30.6150071-04:00
+rank_done rank=41 status=completed_validated formula=CrO3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114131
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=110215
+rank_start rank=42 time=2026-05-23T11:43:08.3816295-04:00
+rank_done rank=42 status=completed_validated formula=SCl2 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114309
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=112857
+rank_start rank=43 time=2026-05-23T11:44:45.9330168-04:00
+rank_done rank=43 status=completed_validated formula=Na3VS3O seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114446
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=115529
+rank_start rank=44 time=2026-05-23T11:46:24.2331067-04:00
+rank_done rank=44 status=completed_validated formula=AsCl5 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114624
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=118180
+rank_start rank=45 time=2026-05-23T11:48:01.8213757-04:00
+rank_done rank=45 status=completed_validated formula=Si seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114802
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=120806
+rank_start rank=46 time=2026-05-23T11:49:39.6618015-04:00
+rank_done rank=46 status=completed_validated formula=KNO3 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_114940
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=123445
+rank_start rank=47 time=2026-05-23T11:51:17.7258492-04:00
+rank_done rank=47 status=completed_validated formula=NaS seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115118
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=126076
+rank_start rank=48 time=2026-05-23T11:52:55.4831282-04:00
+rank_done rank=48 status=completed_validated formula=Bi4Te7Pb seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115256
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=128751
+rank_start rank=49 time=2026-05-23T11:54:32.9484081-04:00
+rank_done rank=49 status=completed_validated formula=TeMoWSe3 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115433
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=131413
+rank_start rank=50 time=2026-05-23T11:56:10.7826217-04:00
+rank_done rank=50 status=completed_validated formula=MoWSe2S2 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115611
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=134084
+rank_start rank=51 time=2026-05-23T11:57:48.4098426-04:00
+rank_done rank=51 status=completed_validated formula=HoSO seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115749
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=136724
+rank_start rank=52 time=2026-05-23T11:59:26.4946060-04:00
+rank_done rank=52 status=completed_validated formula=Te2Mo3WS6 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_115927
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=139402
+rank_start rank=53 time=2026-05-23T12:01:04.7914632-04:00
+rank_done rank=53 status=completed_validated formula=Ca3PbO seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120105
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=142059
+rank_start rank=54 time=2026-05-23T12:02:42.5560879-04:00
+rank_done rank=54 status=completed_validated formula=VRhO4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120243
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=144720
+rank_start rank=55 time=2026-05-23T12:04:20.3698688-04:00
+rank_done rank=55 status=completed_validated formula=Mg2Mo3O8 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120421
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=147391
+rank_start rank=56 time=2026-05-23T12:05:58.4850425-04:00
+rank_done rank=56 status=completed_validated formula=Rb4CuSi2O7 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120559
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=150076
+rank_start rank=57 time=2026-05-23T12:07:36.5022866-04:00
+rank_done rank=57 status=completed_validated formula=NbS2 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120737
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=152709
+rank_start rank=58 time=2026-05-23T12:09:14.8582969-04:00
+rank_done rank=58 status=completed_validated formula=ZnO seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_120915
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=155348
+rank_start rank=59 time=2026-05-23T12:10:52.5668999-04:00
+rank_done rank=59 status=completed_validated formula=ScVO4 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_121053
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=158000
+rank_start rank=60 time=2026-05-23T12:12:30.4686157-04:00
+rank_done rank=60 status=completed_validated formula=Li3VB2O6 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_121231
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=160684
+rank_start rank=61 time=2026-05-23T12:14:08.9714931-04:00
+rank_done rank=61 status=completed_validated formula=Na2GaNiF7 seconds=96 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_121409
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=163367
+rank_start rank=62 time=2026-05-23T12:15:47.0286877-04:00
+rank_done rank=62 status=completed_validated formula=CoC4N6 seconds=97 pilot_dir=C:\LUMENS\sadc_edit_active_pilot_20260523_121547
+uploaded_batch_zip=C:\LUMENS\sadc_gui_batch_bundle.zip size=166023
+batch_done=2026-05-23T12:17:25.7394143-04:00

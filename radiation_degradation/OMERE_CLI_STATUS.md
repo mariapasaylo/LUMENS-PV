@@ -6,6 +6,13 @@ The local OMERE 5.8.1 CrossOver install exposes OMERE's SADC input format, but
 it does not include a standalone `SADC.exe` binary. Running OMERE through Wine is
 therefore not a reliable non-GUI route in this environment.
 
+OMERE/SADC results for the 62 final materials were completed through validated
+GUI automation instead. See:
+
+```text
+radiation_degradation/omere_sadc_outputs_final_materials_20260523
+```
+
 ## Probes Performed
 
 - `Omere.exe` with an `.mms` batch file: process faulted under Wine/CrossOver
@@ -40,12 +47,25 @@ radiation_degradation/sr_niel_outputs_final_materials_20260523/sadc_input_bundle
 It contains 62 `Cell.json` files, 62 `Mission.json` files, 124 copied official
 SR-NIEL curve files, and `sadc_run_manifest.csv`.
 
+## GUI Execution Status
+
+The GUI batch completed with 62 raw OMERE/SADC output files and 62
+`completed_validated` status rows. The parser requires each output to contain
+the candidate formula, manifest density, exact custom electron NIEL filename,
+exact custom proton NIEL filename, and finite Pmax values before a row is marked
+`validated_candidate_layer=True`.
+
 ## Publication Boundary
 
-These bundles are ready for a real SADC executable and avoid manual GUI import.
-They are not final EOL results yet. Material-specific EOL still requires either:
+The current GUI outputs are candidate-specific for active-layer formula,
+density, and SR-NIEL electron/proton curves. They are still comparative
+screening outputs, not fully material-specific publishable EOL predictions,
+because the remaining-factor model uses OMERE sample GaAs-template degradation
+coefficients for every candidate.
 
-- a valid licensed SADC/OMERE command-line executable, or
-- OMERE GUI execution with the same inputs, and
+Fully material-specific EOL still requires:
+
+- a valid licensed SADC/OMERE command-line executable or the validated GUI route,
+  and
 - calibrated material/cell degradation coefficients instead of the included
-  OMERE sample GaAs template coefficients.
+  OMERE sample GaAs-template coefficients.

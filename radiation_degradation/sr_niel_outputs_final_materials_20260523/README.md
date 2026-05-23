@@ -14,5 +14,10 @@ Validation counts:
 
 Important boundary: `srniel_screening_metrics.csv` ranks materials using
 official SR-NIEL curves and a local QA spectrum integration, but it is not a
-TRAD OMERE solar-cell EOL result. EOL remains pending until OMERE is run with a
-specific mission, shielding setup, and solar-cell degradation model.
+TRAD OMERE solar-cell EOL result.
+
+Validated OMERE 5.8.1 SADC GUI outputs for the 62 materials are stored in
+`../omere_sadc_outputs_final_materials_20260523`. Those outputs use
+candidate-specific active-layer formula, density, and custom SR-NIEL curves,
+but still use OMERE's sample/template GaAs-style degradation coefficients for
+remaining-factor and Pmax calculations.

@@ -56,6 +56,9 @@ The run uses these SR-NIEL parameters:
   OMERE or material-specific degradation coefficients.
 - `sadc_input_bundles/`: one SADC-ready `Cell.json`/`Mission.json` bundle per
   material, plus copied official SR-NIEL curves and a run manifest.
+- `omere_sadc_outputs_final_materials_20260523/`: validated OMERE 5.8.1 SADC
+  GUI outputs, parsed EOL screening tables, and the GUI automation scripts used
+  for the 62 final materials.
 
 ## Building SADC Input Bundles
 
@@ -68,8 +71,7 @@ python radiation_degradation/build_sadc_input_bundles.py \
 ```
 
 This does not compute OMERE EOL by itself. It creates reproducible SADC inputs
-so a real `SADC.exe` command-line binary can process the 62 materials without
-manual GUI import.
+for a real `SADC.exe` command-line binary or for OMERE GUI execution.
 
 ## OMERE Boundary
 
@@ -82,4 +84,10 @@ See `OMERE_CLI_STATUS.md` for the current non-GUI execution status.
 
 The official TRAD download currently routes through a form and the TRAD license
 does not permit redistribution. Do not replace OMERE with local LLM-generated
-EOL formulas; run TRAD OMERE once the installer/link is available.
+EOL formulas.
+
+For the current 62-material handoff, OMERE 5.8.1 SADC was run through validated
+GUI automation because the local install did not expose a working standalone
+`SADC.exe`. The resulting tables are real OMERE outputs, but they remain
+comparative screening outputs because the remaining-factor model uses OMERE's
+sample/template GaAs-style degradation coefficients for every candidate.
