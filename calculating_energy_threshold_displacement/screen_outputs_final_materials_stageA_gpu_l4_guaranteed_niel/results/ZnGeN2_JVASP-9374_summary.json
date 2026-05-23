@@ -1,0 +1,233 @@
+{
+  "formula": "ZnGeN2",
+  "material_id": "JVASP-9374",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.0,
+  "material_bandgap_ev": 2.913,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": false,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    15,
+    15,
+    13
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 75.0,
+  "primitive_ecutrho_ry": 750.0,
+  "ed_scan_supercell_atoms": 64,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 2.913,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 2.913,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Zn": 0.591,
+    "Ge": 14.5,
+    "N": 22.0
+  },
+  "element_aggregates_eV": {
+    "Zn": {
+      "recommended_single_value_eV": 0.591,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 0.591,
+      "minimum_eV": 0.591,
+      "maximum_eV": 0.591,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Zn_s0"
+      ],
+      "site_values_eV": {
+        "Zn_s0": 0.591
+      },
+      "site_multiplicities": {
+        "Zn_s0": 4
+      }
+    },
+    "Ge": {
+      "recommended_single_value_eV": 14.5,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 14.5,
+      "minimum_eV": 14.5,
+      "maximum_eV": 14.5,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ge_s0"
+      ],
+      "site_values_eV": {
+        "Ge_s0": 14.5
+      },
+      "site_multiplicities": {
+        "Ge_s0": 4
+      }
+    },
+    "N": {
+      "recommended_single_value_eV": 22.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 22.0,
+      "minimum_eV": 22.0,
+      "maximum_eV": 22.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "N_s0"
+      ],
+      "site_values_eV": {
+        "N_s0": 22.0
+      },
+      "site_multiplicities": {
+        "N_s0": 8
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Zn",
+      "site_label": "Zn_s0",
+      "multiplicity": 4,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 0.591,
+      "best_direction": "[001]",
+      "best_direction_vector": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "best_distance_angstrom": 0.3,
+      "best_tag": "JVASP-9374_Zn_s0_[001]_0p300",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 1.1722470927491355,
+          "best_energy_ev": 31.55706654235906,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.49797217372520736,
+              "tag": "JVASP-9374_Zn_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.1722470927491355,
+              "energy_ev": 31.55706654235906,
+              "tag": "JVASP-9374_Zn_s0_[100]_1p172"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.044494185498271,
+          "best_energy_ev": 62.45561591039631,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.4609759814770576,
+              "tag": "JVASP-9374_Zn_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.1722470927491355,
+              "energy_ev": 13.254033600702238,
+              "tag": "JVASP-9374_Zn_s0_[010]_1p172"
+            },
+            {
+              "distance_angstrom": 2.044494185498271,
+              "energy_ev": 62.45561591039631,
+              "tag": "JVASP-9374_Zn_s0_[010]_2p044"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 0.3,
+          "best_energy_ev": 0.5907859936667422,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.5907859936667422,
+              "tag": "JVASP-9374_Zn_s0_[001]_0p300"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "Ge",
+      "site_label": "Ge_s0",
+      "multiplicity": 4,
+      "representative_index": 4,
+      "status": "fallback",
+      "ed_eV": 14.5,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9374_Ge_s0_[010]_1p876.run.in']' timed out after 300 seconds"
+    },
+    {
+      "element": "N",
+      "site_label": "N_s0",
+      "multiplicity": 8,
+      "representative_index": 8,
+      "status": "fallback",
+      "ed_eV": 22.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9374_N_s0_[001]_1p886.run.in']' timed out after 300 seconds"
+    }
+  ]
+}

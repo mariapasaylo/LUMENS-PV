@@ -1,0 +1,243 @@
+{
+  "formula": "CaSnS3",
+  "material_id": "JVASP-40190",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.0495,
+  "material_bandgap_ev": 1.333,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": false,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    21,
+    10,
+    6
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 80.0,
+  "primitive_ecutrho_ry": 800.0,
+  "ed_scan_supercell_atoms": 40,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 1.333,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 1.333,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Ca": 5.795,
+    "Sn": 12.0,
+    "S": 7.6
+  },
+  "element_aggregates_eV": {
+    "Ca": {
+      "recommended_single_value_eV": 5.795,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 5.795,
+      "minimum_eV": 5.795,
+      "maximum_eV": 5.795,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ca_s0"
+      ],
+      "site_values_eV": {
+        "Ca_s0": 5.795
+      },
+      "site_multiplicities": {
+        "Ca_s0": 4
+      }
+    },
+    "Sn": {
+      "recommended_single_value_eV": 12.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 12.0,
+      "minimum_eV": 12.0,
+      "maximum_eV": 12.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Sn_s0"
+      ],
+      "site_values_eV": {
+        "Sn_s0": 12.0
+      },
+      "site_multiplicities": {
+        "Sn_s0": 4
+      }
+    },
+    "S": {
+      "recommended_single_value_eV": 7.6,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 7.6,
+      "minimum_eV": 7.6,
+      "maximum_eV": 7.6,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "S_s0"
+      ],
+      "site_values_eV": {
+        "S_s0": 7.6
+      },
+      "site_multiplicities": {
+        "S_s0": 12
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Ca",
+      "site_label": "Ca_s0",
+      "multiplicity": 4,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 5.795,
+      "best_direction": "[010]",
+      "best_direction_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "best_distance_angstrom": 1.631366,
+      "best_tag": "JVASP-40190_Ca_s0_[010]_1p631",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.962732374621983,
+          "best_energy_ev": 10.657296203901861,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.09232755246815538,
+              "tag": "JVASP-40190_Ca_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.6313661873109917,
+              "energy_ev": 5.842299000094984,
+              "tag": "JVASP-40190_Ca_s0_[100]_1p631"
+            },
+            {
+              "distance_angstrom": 2.962732374621983,
+              "energy_ev": 10.657296203901861,
+              "tag": "JVASP-40190_Ca_s0_[100]_2p963"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 1.6313661873109917,
+          "best_energy_ev": 5.795428476143801,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.15336731725258917,
+              "tag": "JVASP-40190_Ca_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.6313661873109917,
+              "energy_ev": 5.795428476143801,
+              "tag": "JVASP-40190_Ca_s0_[010]_1p631"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 2.962732374621983,
+          "best_energy_ev": 16.466327651910486,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.0737587747677392,
+              "tag": "JVASP-40190_Ca_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.6313661873109917,
+              "energy_ev": 7.447245323299123,
+              "tag": "JVASP-40190_Ca_s0_[001]_1p631"
+            },
+            {
+              "distance_angstrom": 2.962732374621983,
+              "energy_ev": 16.466327651910486,
+              "tag": "JVASP-40190_Ca_s0_[001]_2p963"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "Sn",
+      "site_label": "Sn_s0",
+      "multiplicity": 4,
+      "representative_index": 4,
+      "status": "fallback",
+      "ed_eV": 12.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-40190_Sn_s0_[100]_1p390.run.in']' timed out after 300 seconds"
+    },
+    {
+      "element": "S",
+      "site_label": "S_s0",
+      "multiplicity": 12,
+      "representative_index": 8,
+      "status": "fallback",
+      "ed_eV": 7.6,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-40190_S_s0_[001]_1p390.run.in']' timed out after 300 seconds"
+    }
+  ]
+}

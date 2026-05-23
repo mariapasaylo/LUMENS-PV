@@ -1,38 +1,40 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=ed-screen
-#SBATCH --partition=hpg-default
+#SBATCH --job-name=ed-gpu-screen
+#SBATCH --partition=hpg-turin
 #SBATCH --nodes=1
-#SBATCH --ntasks=32
-#SBATCH --mem=192G
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --gpus=1
+#SBATCH --mem=64G
 #SBATCH --time=02:00:00
-#SBATCH --output=logs/ed_screen_%A_%a.out
+#SBATCH --output=logs/ed_gpu_screen_%A_%a.out
 
 set -euo pipefail
 
-INPUT_FILE="${1:?usage: sbatch --array=1-N run_ed_pipeline_screen.slurm /abs/path/materials.csv}"
+INPUT_FILE="${1:?usage: sbatch --array=1-N run_ed_pipeline_screen_gpu_l4.slurm /abs/path/materials.csv}"
 shift
 
 CODE_ROOT="${CODE_ROOT:-$HOME/LUMENS-PV}"
 PYTHON_BIN="${PYTHON_BIN:-$HOME/local/dsi3/miniforge/envs/dsi3_full/bin/python3}"
 RUNNER="$CODE_ROOT/calculating_energy_threshold_displacement/run_ed_pipeline.py"
-RESULTS_DIR="${RESULTS_DIR:-$CODE_ROOT/calculating_energy_threshold_displacement/screen_outputs}"
+RESULTS_DIR="${RESULTS_DIR:-$CODE_ROOT/calculating_energy_threshold_displacement/gpu_screen_outputs}"
 if [[ -n "${SLURM_TMPDIR:-}" ]]; then
-  DEFAULT_JOB_LOCAL_SCRATCH="$SLURM_TMPDIR/lumens-ed-${SLURM_JOB_ID:-$$}"
+  DEFAULT_JOB_LOCAL_SCRATCH="$SLURM_TMPDIR/lumens-ed-gpu-${SLURM_JOB_ID:-$$}"
 elif [[ -d /scratch/local ]]; then
-  DEFAULT_JOB_LOCAL_SCRATCH="/scratch/local/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+  DEFAULT_JOB_LOCAL_SCRATCH="/scratch/local/$USER/lumens-ed-gpu/${SLURM_JOB_ID:-$$}"
 else
-  DEFAULT_JOB_LOCAL_SCRATCH="${TMPDIR:-/tmp}/$USER/lumens-ed/${SLURM_JOB_ID:-$$}"
+  DEFAULT_JOB_LOCAL_SCRATCH="${TMPDIR:-/tmp}/$USER/lumens-ed-gpu/${SLURM_JOB_ID:-$$}"
 fi
 JOB_LOCAL_SCRATCH="${JOB_LOCAL_SCRATCH:-$DEFAULT_JOB_LOCAL_SCRATCH}"
 WORKSPACE="${WORKSPACE:-$JOB_LOCAL_SCRATCH/workspace}"
 QE_SCRATCH_ROOT="${QE_SCRATCH_ROOT:-$JOB_LOCAL_SCRATCH/qe}"
-PSEUDO_DIR="${PSEUDO_DIR:-$CODE_ROOT/pseudopotentials}"
+PSEUDO_DIR="${PSEUDO_DIR:-$CODE_ROOT/pseudopotentials_psl_pbe_full}"
 TASK_ID="${SLURM_ARRAY_TASK_ID:?SLURM_ARRAY_TASK_ID is required}"
 
 module purge
-module load gcc/14.2.0 openmpi/5.0.7 espresso/7.3.1
+module load nvhpc/26.3 openmpi/5.0.7 espresso/7.5.0
 
-export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-${SLURM_CPUS_PER_TASK:-1}}"
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}"
 export PYTHONUNBUFFERED=1
 export QE_SCRATCH_ROOT
@@ -70,6 +72,10 @@ PY
 FORMULA="${MATERIAL_SPEC[0]}"
 MATERIAL_ID="${MATERIAL_SPEC[1]}"
 
+echo "GPU job on $(hostname), CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-}"
+echo "QE executable: $(command -v pw.x)"
+nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || true
+
 CMD=(
   "$PYTHON_BIN" "$RUNNER"
   --formula "$FORMULA"
@@ -78,7 +84,7 @@ CMD=(
   --skip-aggregate-outputs
   --pseudo-dir "$PSEUDO_DIR"
   --qe-executable pw.x
-  --nprocs "${SLURM_NTASKS:-32}"
+  --nprocs "${NPROCS:-${SLURM_NTASKS:-1}}"
   --qe-launcher mpirun
   --direction-mode fibonacci
   --ed-directions "${ED_DIRECTIONS:-12}"

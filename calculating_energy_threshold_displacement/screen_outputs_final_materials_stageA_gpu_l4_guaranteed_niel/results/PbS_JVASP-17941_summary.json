@@ -1,0 +1,205 @@
+{
+  "formula": "PbS",
+  "material_id": "JVASP-17941",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.2524,
+  "material_bandgap_ev": 0.127,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": false,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    16,
+    16,
+    16
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 80.0,
+  "primitive_ecutrho_ry": 800.0,
+  "ed_scan_supercell_atoms": 16,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.127,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.127,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Pb": 12.507,
+    "S": 7.6
+  },
+  "element_aggregates_eV": {
+    "Pb": {
+      "recommended_single_value_eV": 12.507,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 12.507,
+      "minimum_eV": 12.507,
+      "maximum_eV": 12.507,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Pb_s0"
+      ],
+      "site_values_eV": {
+        "Pb_s0": 12.507
+      },
+      "site_multiplicities": {
+        "Pb_s0": 1
+      }
+    },
+    "S": {
+      "recommended_single_value_eV": 7.6,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 7.6,
+      "minimum_eV": 7.6,
+      "maximum_eV": 7.6,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "S_s0"
+      ],
+      "site_values_eV": {
+        "S_s0": 7.6
+      },
+      "site_multiplicities": {
+        "S_s0": 1
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Pb",
+      "site_label": "Pb_s0",
+      "multiplicity": 1,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 12.507,
+      "best_direction": "[100]",
+      "best_direction_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "best_distance_angstrom": 1.727383,
+      "best_tag": "JVASP-17941_Pb_s0_[100]_1p727",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 1.7273827278150506,
+          "best_energy_ev": 12.506502404389806,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.05736745217760611,
+              "tag": "JVASP-17941_Pb_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7273827278150506,
+              "energy_ev": 12.506502404389806,
+              "tag": "JVASP-17941_Pb_s0_[100]_1p727"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 1.7273827278150506,
+          "best_energy_ev": 12.796050735642673,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.05842937652255278,
+              "tag": "JVASP-17941_Pb_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7273827278150506,
+              "energy_ev": 12.796050735642673,
+              "tag": "JVASP-17941_Pb_s0_[010]_1p727"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 1.7273827278150506,
+          "best_energy_ev": 13.360552979437927,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.09144481511080624,
+              "tag": "JVASP-17941_Pb_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7273827278150506,
+              "energy_ev": 13.360552979437927,
+              "tag": "JVASP-17941_Pb_s0_[001]_1p727"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "S",
+      "site_label": "S_s0",
+      "multiplicity": 1,
+      "representative_index": 1,
+      "status": "fallback",
+      "ed_eV": 7.6,
+      "fallback": true,
+      "error": "No reliable compound-specific DFT Ed found in scan."
+    }
+  ]
+}

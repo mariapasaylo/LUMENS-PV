@@ -113,7 +113,7 @@ if "formula" in first_line.lower():
         rows = list(csv.DictReader(handle))
     row = rows[task_id - 1]
     print((row.get("formula") or "").strip())
-    print((row.get("material_id") or "").strip())
+    print((row.get("material_id") or row.get("jid") or row.get("JID") or row.get("jarvis_id") or "").strip())
 else:
     with path.open("r", encoding="utf-8") as handle:
         rows = [line.strip() for line in handle if line.strip() and not line.lstrip().startswith("#")]

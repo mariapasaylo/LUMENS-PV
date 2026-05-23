@@ -1,0 +1,302 @@
+{
+  "formula": "Rb2As3",
+  "material_id": "JVASP-11390",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.0,
+  "material_bandgap_ev": 0.792,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": false,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    13,
+    13,
+    11
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 80.0,
+  "primitive_ecutrho_ry": 800.0,
+  "ed_scan_supercell_atoms": 10,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.792,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.792,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Rb": 3.146,
+    "As": 5.88
+  },
+  "element_aggregates_eV": {
+    "Rb": {
+      "recommended_single_value_eV": 3.146,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 3.146,
+      "minimum_eV": 3.146,
+      "maximum_eV": 3.146,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Rb_s0"
+      ],
+      "site_values_eV": {
+        "Rb_s0": 3.146
+      },
+      "site_multiplicities": {
+        "Rb_s0": 4
+      }
+    },
+    "As": {
+      "recommended_single_value_eV": 5.88,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 5.88,
+      "minimum_eV": 5.88,
+      "maximum_eV": 5.88,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "As_s0"
+      ],
+      "site_values_eV": {
+        "As_s0": 5.88
+      },
+      "site_multiplicities": {
+        "As_s0": 6
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Rb",
+      "site_label": "Rb_s0",
+      "multiplicity": 4,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 3.146,
+      "best_direction": "[100]",
+      "best_direction_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "best_distance_angstrom": 1.966109,
+      "best_tag": "JVASP-11390_Rb_s0_[100]_1p966",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 1.9661088651822387,
+          "best_energy_ev": 3.1458118731784643,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.051042709722818415,
+              "tag": "JVASP-11390_Rb_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.9661088651822387,
+              "energy_ev": 3.1458118731784643,
+              "tag": "JVASP-11390_Rb_s0_[100]_1p966"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 3.632217730364477,
+          "best_energy_ev": 41.04279937881717,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.05019725195985788,
+              "tag": "JVASP-11390_Rb_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.9661088651822387,
+              "energy_ev": 3.135459709535315,
+              "tag": "JVASP-11390_Rb_s0_[010]_1p966"
+            },
+            {
+              "distance_angstrom": 3.632217730364477,
+              "energy_ev": 41.04279937881717,
+              "tag": "JVASP-11390_Rb_s0_[010]_3p632"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 3.632217730364477,
+          "best_energy_ev": 10.111317158734865,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.11173512115059012,
+              "tag": "JVASP-11390_Rb_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.9661088651822387,
+              "energy_ev": 3.6666867820562667,
+              "tag": "JVASP-11390_Rb_s0_[001]_1p966"
+            },
+            {
+              "distance_angstrom": 3.632217730364477,
+              "energy_ev": 10.111317158734865,
+              "tag": "JVASP-11390_Rb_s0_[001]_3p632"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "As",
+      "site_label": "As_s0",
+      "multiplicity": 6,
+      "representative_index": 4,
+      "status": "ok",
+      "ed_eV": 5.88,
+      "best_direction": "[010]",
+      "best_direction_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.432893,
+      "best_tag": "JVASP-11390_As_s0_[010]_2p433",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.4328928664776095,
+          "best_energy_ev": 50.07074227894405,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.3937265784022887,
+              "tag": "JVASP-11390_As_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.3664464332388049,
+              "energy_ev": 23.76239440579682,
+              "tag": "JVASP-11390_As_s0_[100]_1p366"
+            },
+            {
+              "distance_angstrom": 2.4328928664776095,
+              "energy_ev": 50.07074227894405,
+              "tag": "JVASP-11390_As_s0_[100]_2p433"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.4328928664776095,
+          "best_energy_ev": 5.879948537735461,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.0705980362278952,
+              "tag": "JVASP-11390_As_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.3664464332388049,
+              "energy_ev": 2.120322627306183,
+              "tag": "JVASP-11390_As_s0_[010]_1p366"
+            },
+            {
+              "distance_angstrom": 2.4328928664776095,
+              "energy_ev": 5.879948537735461,
+              "tag": "JVASP-11390_As_s0_[010]_2p433"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 1.3664464332388049,
+          "best_energy_ev": 99.0713525842326,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.5987012416307305,
+              "tag": "JVASP-11390_As_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.3664464332388049,
+              "energy_ev": 99.0713525842326,
+              "tag": "JVASP-11390_As_s0_[001]_1p366"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    }
+  ]
+}

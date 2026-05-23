@@ -1,0 +1,145 @@
+{
+  "formula": "TeMoWSe3",
+  "material_id": "JVASP-28952",
+  "status": "ok",
+  "calculation_method": "elemental_fallback_after_dft_failure",
+  "tde_interpretation": "fallback_screening_value_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "No converged DFT displacement energy; elemental fallback Ed used.",
+  "method_limitations": [
+    "Material-level QE calculation failed before a complete DFT displacement scan could be written.",
+    "Fallback values are literature/elemental screening estimates, not material-specific DFT barriers.",
+    "Rerun this material with a more forgiving DFT profile before using it for final physics claims."
+  ],
+  "material_selection": {
+    "selection_mode": "input_formula_fallback",
+    "candidate_count": null
+  },
+  "structure_source": "material_level_fallback_no_qe_result",
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 0,
+  "direction_index_start": 0,
+  "direction_index_stop": null,
+  "total_direction_count": 3,
+  "ed_values_eV": {
+    "Te": 5.5,
+    "Mo": 33.0,
+    "W": 55.0,
+    "Se": 7.4
+  },
+  "element_aggregates_eV": {
+    "Te": {
+      "recommended_single_value_eV": 5.5,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 5.5,
+      "minimum_eV": 5.5,
+      "maximum_eV": 5.5,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Te_fallback"
+      ],
+      "site_values_eV": {
+        "Te_fallback": 5.5
+      },
+      "site_multiplicities": {
+        "Te_fallback": 1.0
+      }
+    },
+    "Mo": {
+      "recommended_single_value_eV": 33.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 33.0,
+      "minimum_eV": 33.0,
+      "maximum_eV": 33.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Mo_fallback"
+      ],
+      "site_values_eV": {
+        "Mo_fallback": 33.0
+      },
+      "site_multiplicities": {
+        "Mo_fallback": 1.0
+      }
+    },
+    "W": {
+      "recommended_single_value_eV": 55.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 55.0,
+      "minimum_eV": 55.0,
+      "maximum_eV": 55.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "W_fallback"
+      ],
+      "site_values_eV": {
+        "W_fallback": 55.0
+      },
+      "site_multiplicities": {
+        "W_fallback": 1.0
+      }
+    },
+    "Se": {
+      "recommended_single_value_eV": 7.4,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 7.4,
+      "minimum_eV": 7.4,
+      "maximum_eV": 7.4,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Se_fallback"
+      ],
+      "site_values_eV": {
+        "Se_fallback": 7.4
+      },
+      "site_multiplicities": {
+        "Se_fallback": 3.0
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Te",
+      "site_label": "Te_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 5.5,
+      "fallback": true,
+      "error": "QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out."
+    },
+    {
+      "element": "Mo",
+      "site_label": "Mo_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 33.0,
+      "fallback": true,
+      "error": "QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out."
+    },
+    {
+      "element": "W",
+      "site_label": "W_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 55.0,
+      "fallback": true,
+      "error": "QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out."
+    },
+    {
+      "element": "Se",
+      "site_label": "Se_fallback",
+      "multiplicity": 3.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 7.4,
+      "fallback": true,
+      "error": "QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out."
+    }
+  ],
+  "error": "QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out."
+}

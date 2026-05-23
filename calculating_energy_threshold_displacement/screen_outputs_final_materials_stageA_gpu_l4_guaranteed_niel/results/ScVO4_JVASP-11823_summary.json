@@ -1,0 +1,117 @@
+{
+  "formula": "ScVO4",
+  "material_id": "JVASP-11823",
+  "status": "ok",
+  "calculation_method": "elemental_fallback_after_dft_failure",
+  "tde_interpretation": "fallback_screening_value_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "No converged DFT displacement energy; elemental fallback Ed used.",
+  "method_limitations": [
+    "Material-level QE calculation failed before a complete DFT displacement scan could be written.",
+    "Fallback values are literature/elemental screening estimates, not material-specific DFT barriers.",
+    "Rerun this material with a more forgiving DFT profile before using it for final physics claims."
+  ],
+  "material_selection": {
+    "selection_mode": "input_formula_fallback",
+    "candidate_count": null
+  },
+  "structure_source": "material_level_fallback_no_qe_result",
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 0,
+  "direction_index_start": 0,
+  "direction_index_stop": null,
+  "total_direction_count": 3,
+  "ed_values_eV": {
+    "Sc": 25.0,
+    "V": 28.0,
+    "O": 28.0
+  },
+  "element_aggregates_eV": {
+    "Sc": {
+      "recommended_single_value_eV": 25.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 25.0,
+      "minimum_eV": 25.0,
+      "maximum_eV": 25.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Sc_fallback"
+      ],
+      "site_values_eV": {
+        "Sc_fallback": 25.0
+      },
+      "site_multiplicities": {
+        "Sc_fallback": 1.0
+      }
+    },
+    "V": {
+      "recommended_single_value_eV": 28.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 28.0,
+      "minimum_eV": 28.0,
+      "maximum_eV": 28.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "V_fallback"
+      ],
+      "site_values_eV": {
+        "V_fallback": 28.0
+      },
+      "site_multiplicities": {
+        "V_fallback": 1.0
+      }
+    },
+    "O": {
+      "recommended_single_value_eV": 28.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 28.0,
+      "minimum_eV": 28.0,
+      "maximum_eV": 28.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "O_fallback"
+      ],
+      "site_values_eV": {
+        "O_fallback": 28.0
+      },
+      "site_multiplicities": {
+        "O_fallback": 4.0
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Sc",
+      "site_label": "Sc_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 25.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+    },
+    {
+      "element": "V",
+      "site_label": "V_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 28.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+    },
+    {
+      "element": "O",
+      "site_label": "O_fallback",
+      "multiplicity": 4.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 28.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+    }
+  ],
+  "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+}

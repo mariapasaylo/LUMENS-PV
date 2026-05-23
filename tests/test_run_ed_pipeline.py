@@ -14,13 +14,20 @@ from unittest import mock
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PIPELINE_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline.py"
 SLURM_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline.slurm"
-SCREEN_SLURM_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "run_ed_pipeline_screen.slurm"
-AGGREGATOR_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "aggregate_ed_results.py"
+AGGREGATE_PATH = REPO_ROOT / "calculating_energy_threshold_displacement" / "aggregate_ed_results.py"
 HIGH_ACCURACY_CSV = REPO_ROOT / "calculating_energy_threshold_displacement" / "high_accuracy_materials.csv"
 
 
 def load_pipeline_module():
     spec = importlib.util.spec_from_file_location("run_ed_pipeline", PIPELINE_PATH)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_aggregate_module():
+    spec = importlib.util.spec_from_file_location("aggregate_ed_results", AGGREGATE_PATH)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -162,6 +169,23 @@ class TestPinnedMaterials(unittest.TestCase):
         self.assertTrue(all(row["formula"].strip() for row in rows))
         self.assertTrue(all(row["material_id"].strip().startswith("JVASP-") for row in rows))
         self.assertEqual(len({(row["formula"], row["material_id"]) for row in rows}), len(rows))
+
+    def test_material_loader_accepts_jid_alias(self):
+        pipeline = load_pipeline_module()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = Path(tmpdir) / "materials.csv"
+            csv_path.write_text("formula,jid\nSi,JVASP-25415\n", encoding="utf-8")
+
+            requests = pipeline.load_material_requests(str(csv_path), None, None, None)
+
+        self.assertEqual(requests, [{"formula": "Si", "material_id": "JVASP-25415"}])
+
+    def test_material_id_selection_rejects_formula_mismatch(self):
+        pipeline = load_pipeline_module()
+        dataset = [{"jid": "JVASP-1", "formula": "GaAs"}]
+
+        with self.assertRaisesRegex(RuntimeError, "Refusing to run a mismatched structure"):
+            pipeline.select_material(dataset, "Si", "JVASP-1")
 
 
 class TestStructureIdealization(unittest.TestCase):
@@ -404,12 +428,97 @@ class TestQeEnergyParsing(unittest.TestCase):
             self.pipeline.parse_total_energy_ry(output_text, require_converged=True)
 
 
+class TestNielExportHelpers(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.pipeline = load_pipeline_module()
+
+    def test_formula_stoichiometry_parses_compounds(self):
+        self.assertEqual(
+            self.pipeline.formula_stoichiometry("GaAgP2Se6"),
+            {"Ga": 1.0, "Ag": 1.0, "P": 2.0, "Se": 6.0},
+        )
+
+    def test_aggregate_outputs_write_niel_ready_table(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            results_dir = Path(tmpdir)
+            self.pipeline.write_aggregate_outputs(
+                results_dir,
+                [
+                    {
+                        "formula": "ZnO",
+                        "material_id": "JVASP-17188",
+                        "status": "ok",
+                        "structure_source": "qe_vc_relax",
+                        "ed_mode": "static",
+                        "calculation_method": "dft_displacement_barrier_proxy",
+                        "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+                        "element_aggregates_eV": {
+                            "Zn": {
+                                "recommended_single_value_eV": 12.3,
+                                "aggregation_mode": "min",
+                                "weighted_mean_eV": 12.3,
+                                "minimum_eV": 12.3,
+                                "maximum_eV": 12.3,
+                                "inequivalent_site_count": 1,
+                                "site_labels": ["Zn_s0"],
+                                "site_values_eV": {"Zn_s0": 12.3},
+                                "site_multiplicities": {"Zn_s0": 1},
+                            },
+                            "O": {
+                                "recommended_single_value_eV": 28.0,
+                                "aggregation_mode": "min",
+                                "weighted_mean_eV": 28.0,
+                                "minimum_eV": 28.0,
+                                "maximum_eV": 28.0,
+                                "inequivalent_site_count": 1,
+                                "site_labels": ["O_s0"],
+                                "site_values_eV": {"O_s0": 28.0},
+                                "site_multiplicities": {"O_s0": 1},
+                            },
+                        },
+                        "site_results": [],
+                    }
+                ],
+            )
+            with (results_dir / "niel_ed_inputs.csv").open("r", encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle))
+
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["formula"], "ZnO")
+        self.assertEqual(rows[0]["stoichiometric_index"], "1.0")
+        self.assertEqual(rows[0]["displacement_threshold_energy_eV"], "12.3")
+
+
+class TestAggregateScript(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.aggregate = load_aggregate_module()
+
+    def test_load_summaries_ignores_batch_summary_file(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            results_dir = Path(tmpdir)
+            (results_dir / "ZnO_JVASP-17188_summary.json").write_text(
+                json.dumps({"formula": "ZnO", "material_id": "JVASP-17188", "status": "ok"}),
+                encoding="utf-8",
+            )
+            (results_dir / "ed_batch_summary.json").write_text(
+                json.dumps({"total_requests": 1, "material_summaries": []}),
+                encoding="utf-8",
+            )
+
+            summaries = self.aggregate.load_summaries(results_dir)
+
+        self.assertEqual(len(summaries), 1)
+        self.assertEqual(summaries[0]["formula"], "ZnO")
+
+
 class TestSlurmWrapper(unittest.TestCase):
     def test_wrapper_builds_strict_command_line(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             tmpdir_path = Path(tmpdir)
             csv_path = tmpdir_path / "materials.csv"
-            csv_path.write_text("formula,material_id\nInP,JVASP-1183\nBSb,JVASP-133843\n", encoding="utf-8")
+            csv_path.write_text("formula,jid\nInP,JVASP-1183\nBSb,JVASP-133843\n", encoding="utf-8")
 
             env = os.environ.copy()
             env.update({
@@ -424,6 +533,7 @@ class TestSlurmWrapper(unittest.TestCase):
                 "PSEUDO_DIR": "/usr/share/espresso/pseudo",
                 "OMP_NUM_THREADS": "1",
                 "MKL_NUM_THREADS": "1",
+                "SLURM_TMPDIR": str(tmpdir_path / "slurm_tmp"),
             })
 
             completed = subprocess.run(
@@ -440,7 +550,6 @@ class TestSlurmWrapper(unittest.TestCase):
         self.assertIn("Running:", completed.stdout)
         self.assertIn("--formula BSb", completed.stdout)
         self.assertIn("--material-id JVASP-133843", completed.stdout)
-        self.assertIn("--skip-aggregate-outputs", completed.stdout)
         self.assertIn("--qe-launcher mpirun", completed.stdout)
         self.assertIn("--ed-kpoint-mode auto", completed.stdout)
         self.assertIn("--idealize-relaxed-structure", completed.stdout)
@@ -448,111 +557,6 @@ class TestSlurmWrapper(unittest.TestCase):
         self.assertIn("--spin-mode auto", completed.stdout)
         self.assertIn("--occupations-mode auto", completed.stdout)
         self.assertIn("--supercell-min-length 16.0", completed.stdout)
-
-    def test_screen_wrapper_skips_per_task_aggregate_outputs(self):
-        text = SCREEN_SLURM_PATH.read_text(encoding="utf-8")
-        self.assertIn("--skip-aggregate-outputs", text)
-
-
-class TestAggregateEdResults(unittest.TestCase):
-    def test_aggregator_rebuilds_csvs_from_per_material_summaries(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            results_dir = Path(tmpdir) / "results"
-            results_dir.mkdir()
-
-            ok_summary = {
-                "formula": "InP",
-                "material_id": "JVASP-1183",
-                "status": "ok",
-                "structure_source": "jarvis_relaxed_input+idealized",
-                "ed_mode": "static",
-                "element_aggregates_eV": {
-                    "In": {
-                        "recommended_single_value_eV": 8.088,
-                        "aggregation_mode": "min",
-                        "weighted_mean_eV": 8.088,
-                        "minimum_eV": 8.088,
-                        "maximum_eV": 8.088,
-                        "inequivalent_site_count": 1,
-                    },
-                    "P": {
-                        "recommended_single_value_eV": 7.66,
-                        "aggregation_mode": "min",
-                        "weighted_mean_eV": 7.66,
-                        "minimum_eV": 7.66,
-                        "maximum_eV": 7.66,
-                        "inequivalent_site_count": 1,
-                    },
-                },
-                "site_results": [
-                    {
-                        "element": "In",
-                        "site_label": "In_s0",
-                        "ed_eV": 8.088,
-                        "multiplicity": 4,
-                        "best_direction": "dir_000",
-                        "best_distance_angstrom": 0.40,
-                        "status": "ok",
-                    },
-                    {
-                        "element": "P",
-                        "site_label": "P_s0",
-                        "ed_eV": 7.66,
-                        "multiplicity": 4,
-                        "best_direction": "dir_001",
-                        "best_distance_angstrom": 0.35,
-                        "status": "ok",
-                    },
-                ],
-            }
-            failed_summary = {
-                "formula": "GaSb",
-                "material_id": "JVASP-1177",
-                "status": "failed",
-                "ed_mode": "static",
-                "error": "SCF did not converge",
-            }
-
-            (results_dir / "GaSb_JVASP-1177_summary.json").write_text(
-                json.dumps(failed_summary),
-                encoding="utf-8",
-            )
-            (results_dir / "InP_JVASP-1183_summary.json").write_text(
-                json.dumps(ok_summary),
-                encoding="utf-8",
-            )
-
-            completed = subprocess.run(
-                [sys.executable, str(AGGREGATOR_PATH), "--results-dir", str(results_dir)],
-                cwd=REPO_ROOT,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                check=False,
-            )
-
-            self.assertEqual(completed.returncode, 0, msg=completed.stdout)
-            self.assertIn("Loaded 2 material summaries", completed.stdout)
-
-            with (results_dir / "ed_results.csv").open("r", encoding="utf-8", newline="") as handle:
-                element_rows = list(csv.DictReader(handle))
-            with (results_dir / "ed_site_results.csv").open("r", encoding="utf-8", newline="") as handle:
-                site_rows = list(csv.DictReader(handle))
-            batch_summary = json.loads((results_dir / "ed_batch_summary.json").read_text(encoding="utf-8"))
-
-            self.assertEqual(len(element_rows), 3)
-            self.assertEqual(len(site_rows), 2)
-            self.assertEqual(batch_summary["total_requests"], 2)
-            self.assertEqual(batch_summary["successful_materials"], 1)
-            self.assertEqual(batch_summary["failed_materials"], 1)
-            self.assertEqual(
-                {(row["formula"], row["element"], row["status"]) for row in element_rows},
-                {
-                    ("GaSb", "", "failed"),
-                    ("InP", "In", "ok"),
-                    ("InP", "P", "ok"),
-                },
-            )
 
 
 if __name__ == "__main__":

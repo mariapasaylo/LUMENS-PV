@@ -1,0 +1,182 @@
+formula,material_id,element,site_label,site_ed_eV,multiplicity,best_direction,best_distance_angstrom,status,error
+Ag2Te,JVASP-108812,Ag,Ag_s0,25.44,2,[010],2.916154,ok,
+Ag2Te,JVASP-108812,Te,Te_s0,49.149,1,[010],2.916154,ok,
+Ag3PO4,JVASP-9585,Ag,Ag_s0,14.705,6,[001],1.342385,ok,
+Ag3PO4,JVASP-9585,P,P_s0,8.7,2,,,fallback,QE failed for JVASP-9585_P_s0_[100]_0p300 with code 1. See /scratch/local/33070752/lumens-ed-gpu-33070752/workspace/calculations/pipeline_JVASP-9585/ed/JVASP-9585_P_s0_[100]_0p300.out.
+Ag3PO4,JVASP-9585,O,O_s0,6.933,8,[001],1.562888,ok,
+Ag3SI,JVASP-53111,Ag,Ag_s0,29.402,3,[100],1.42271,ok,
+Ag3SI,JVASP-53111,S,S_s0,2.943,1,[100],1.42271,ok,
+Ag3SI,JVASP-53111,I,I_s0,43.659,1,[010],2.974258,ok,
+AlBiO3,JVASP-11273,Al,Al_s0,4.392,2,[001],1.272214,ok,
+AlBiO3,JVASP-11273,Bi,Bi_s0,21.997,2,[010],2.099136,ok,
+AlBiO3,JVASP-11273,O,O_s0,8.407,6,[001],2.244427,ok,
+AlInSb2,JVASP-109795,Al,Al_s0,1.35,1,[001],2.688133,ok,
+AlInSb2,JVASP-109795,In,In_s0,0.286,1,[001],0.3,ok,
+AlInSb2,JVASP-109795,Sb,Sb_s0,14.278,2,[100],2.688133,ok,
+AsCl5,JVASP-5770,As,As_s0,1.219,2,[001],0.3,ok,
+AsCl5,JVASP-5770,Cl,Cl_s0,0.668,10,[010],0.3,ok,
+BaAlSi,JVASP-17183,Ba,Ba_s0,7.95,1,[100],1.949706,ok,
+BaAlSi,JVASP-17183,Al,Al_s0,4.891,1,[001],2.50115,ok,
+BaAlSi,JVASP-17183,Si,Si_s0,2.351,1,[010],2.50115,ok,
+BaH2O4,JVASP-54745,Ba,Ba_s0,49.308,4,[001],2.762234,ok,
+BaH2O4,JVASP-54745,H,H_s0,1.286,8,[010],0.676418,ok,
+BaH2O4,JVASP-54745,O,O_s0,0.599,16,[010],0.3,ok,
+Bi4Te7Pb,JVASP-12475,Bi,Bi_fallback,8.0,4.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-12475_perf.run.in']' timed out after 300 seconds"
+Bi4Te7Pb,JVASP-12475,Te,Te_fallback,5.5,7.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-12475_perf.run.in']' timed out after 300 seconds"
+Bi4Te7Pb,JVASP-12475,Pb,Pb_fallback,8.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-12475_perf.run.in']' timed out after 300 seconds"
+Ca3PbO,JVASP-17656,Ca,Ca_fallback,8.0,3.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17656_perf.run.in']' timed out after 300 seconds"
+Ca3PbO,JVASP-17656,Pb,Pb_fallback,8.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17656_perf.run.in']' timed out after 300 seconds"
+Ca3PbO,JVASP-17656,O,O_fallback,28.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17656_perf.run.in']' timed out after 300 seconds"
+Ca3SnH2,JVASP-37879,Ca,Ca_s0,6.884,6,[100],2.246551,ok,
+Ca3SnH2,JVASP-37879,Sn,Sn_s0,20.699,2,[001],3.296831,ok,
+Ca3SnH2,JVASP-37879,H,H_s0,1.517,4,[010],2.22316,ok,
+CaSnS3,JVASP-40190,Ca,Ca_s0,5.795,4,[010],1.631366,ok,
+CaSnS3,JVASP-40190,Sn,Sn_s0,12.0,4,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-40190_Sn_s0_[100]_1p390.run.in']' timed out after 300 seconds"
+CaSnS3,JVASP-40190,S,S_s0,7.6,12,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-40190_S_s0_[001]_1p390.run.in']' timed out after 300 seconds"
+Cd2GaAgSe4,JVASP-108799,Cd,Cd_s0,14.814,2,[100],2.575589,ok,
+Cd2GaAgSe4,JVASP-108799,Ga,Ga_s0,2.202,1,[100],2.435366,ok,
+Cd2GaAgSe4,JVASP-108799,Ag,Ag_s0,5.875,1,[100],2.584289,ok,
+Cd2GaAgSe4,JVASP-108799,Se,Se_s0,25.628,4,[010],2.587475,ok,
+CoC4N6,JVASP-59765,Co,Co_fallback,22.0,1.0,,,fallback,QE failed for JVASP-59765_perf with code 1. See /scratch/local/33071155/lumens-ed-gpu-33071155/workspace/calculations/pipeline_JVASP-59765/ed/JVASP-59765_perf.out.
+CoC4N6,JVASP-59765,C,C_fallback,37.0,4.0,,,fallback,QE failed for JVASP-59765_perf with code 1. See /scratch/local/33071155/lumens-ed-gpu-33071155/workspace/calculations/pipeline_JVASP-59765/ed/JVASP-59765_perf.out.
+CoC4N6,JVASP-59765,N,N_fallback,22.0,6.0,,,fallback,QE failed for JVASP-59765_perf with code 1. See /scratch/local/33071155/lumens-ed-gpu-33071155/workspace/calculations/pipeline_JVASP-59765/ed/JVASP-59765_perf.out.
+CrO3,JVASP-44469,Cr,Cr_s0,11.925,4,[010],1.581287,ok,
+CrO3,JVASP-44469,O,O_s0,2.921,12,[100],0.3,ok,
+Cu2SnSe3,JVASP-109764,Cu,Cu_s0,1.448,2,[001],2.420819,ok,
+Cu2SnSe3,JVASP-109764,Sn,Sn_s0,2.997,1,[001],1.454057,ok,
+Cu2SnSe3,JVASP-109764,Se,Se_s0,0.62,3,[001],1.360409,ok,
+CuAs2Pb6Cl7O6,JVASP-53178,Cu,Cu_s0,1.032,1,[001],2.345902,ok,
+CuAs2Pb6Cl7O6,JVASP-53178,As,As_s0,7.905,2,[001],1.062121,ok,
+CuAs2Pb6Cl7O6,JVASP-53178,Pb,Pb_s0,9.406,6,[001],2.377524,ok,
+CuAs2Pb6Cl7O6,JVASP-53178,Cl,Cl_s0,8.419,7,[010],1.322951,ok,
+CuAs2Pb6Cl7O6,JVASP-53178,O,O_s0,4.314,6,[001],1.799541,ok,
+Ga3BN4,JVASP-35152,Ga,Ga_s0,10.808,3,[100],1.952613,ok,
+Ga3BN4,JVASP-35152,B,B_s0,8.338,1,[010],1.643482,ok,
+Ga3BN4,JVASP-35152,N,N_s0,8.691,4,[010],1.643482,ok,
+GaAgP2Se6,JVASP-27498,Ga,Ga_s0,5.442,2,[001],2.658745,ok,
+GaAgP2Se6,JVASP-27498,Ag,Ag_s0,1.858,2,[001],1.588131,ok,
+GaAgP2Se6,JVASP-27498,P,P_s0,2.469,4,[001],2.229486,ok,
+GaAgP2Se6,JVASP-27498,Se,Se_s0,2.533,12,[001],2.229486,ok,
+GaAgTeSe,JVASP-109402,Ga,Ga_s0,2.622,2,[001],1.391161,ok,
+GaAgTeSe,JVASP-109402,Ag,Ag_s0,1.166,2,[100],1.496189,ok,
+GaAgTeSe,JVASP-109402,Te,Te_s0,3.638,2,[100],1.47357,ok,
+GaAgTeSe,JVASP-109402,Se,Se_s0,2.338,2,[001],2.482321,ok,
+HfS3,JVASP-8218,Hf,Hf_s0,30.0,2,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-8218_Hf_s0_[010]_1p445.run.in']' timed out after 300 seconds"
+HfS3,JVASP-8218,S,S_s0,4.039,6,[100],1.198032,ok,
+Hg3Cl2O2,JVASP-12474,Hg,Hg_s0,17.776,6,[001],2.216523,ok,
+Hg3Cl2O2,JVASP-12474,Cl,Cl_s0,12.456,4,[001],1.510798,ok,
+Hg3Cl2O2,JVASP-12474,O,O_s0,2.177,4,[100],1.202033,ok,
+HgSO4,JVASP-9390,Hg,Hg_s0,27.053,2,[001],1.280788,ok,
+HgSO4,JVASP-9390,S,S_s0,3.01,2,[100],0.3,ok,
+HgSO4,JVASP-9390,O,O_s0,2.315,8,[100],0.3,ok,
+HoSO,JVASP-46072,Ho,Ho_fallback,9.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-46072_perf.run.in']' timed out after 300 seconds"
+HoSO,JVASP-46072,S,S_fallback,7.6,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-46072_perf.run.in']' timed out after 300 seconds"
+HoSO,JVASP-46072,O,O_fallback,28.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-46072_perf.run.in']' timed out after 300 seconds"
+InAgS2,JVASP-12383,In,In_s0,39.49,4,[010],2.492886,ok,
+InAgS2,JVASP-12383,Ag,Ag_s0,2.877,4,[100],2.546488,ok,
+InAgS2,JVASP-12383,S,S_s0,9.262,8,[001],2.492886,ok,
+InN,JVASP-17841,In,In_s0,60.643,1,[001],1.325304,ok,
+InN,JVASP-17841,N,N_s0,52.307,1,[001],1.325304,ok,
+InS,JVASP-51076,In,In_s0,11.529,4,[100],2.547285,ok,
+InS,JVASP-51076,S,S_s0,3.526,4,[010],1.423643,ok,
+KNO3,JVASP-53146,K,K_s0,3.45,1,[001],2.72596,ok,
+KNO3,JVASP-53146,N,N_s0,3.834,1,[010],0.3,ok,
+KNO3,JVASP-53146,O,O_s0,3.342,3,[010],0.3,ok,
+KP,JVASP-10123,K,K_s0,12.274,8,[001],3.219023,ok,
+KP,JVASP-10123,P,P_s0,12.243,8,[010],2.273121,ok,
+Li3VB2O6,JVASP-40731,Li,Li_fallback,12.0,3.0,,,fallback,QE failed for JVASP-40731_perf with code 1. See /scratch/local/33071358/lumens-ed-gpu-33071358/workspace/calculations/pipeline_JVASP-40731/ed/JVASP-40731_perf.out.
+Li3VB2O6,JVASP-40731,V,V_fallback,28.0,1.0,,,fallback,QE failed for JVASP-40731_perf with code 1. See /scratch/local/33071358/lumens-ed-gpu-33071358/workspace/calculations/pipeline_JVASP-40731/ed/JVASP-40731_perf.out.
+Li3VB2O6,JVASP-40731,B,B_fallback,22.0,2.0,,,fallback,QE failed for JVASP-40731_perf with code 1. See /scratch/local/33071358/lumens-ed-gpu-33071358/workspace/calculations/pipeline_JVASP-40731/ed/JVASP-40731_perf.out.
+Li3VB2O6,JVASP-40731,O,O_fallback,28.0,6.0,,,fallback,QE failed for JVASP-40731_perf with code 1. See /scratch/local/33071358/lumens-ed-gpu-33071358/workspace/calculations/pipeline_JVASP-40731/ed/JVASP-40731_perf.out.
+Mg2Mo3O8,JVASP-19255,Mg,Mg_fallback,10.0,2.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-19255_perf.run.in']' timed out after 300 seconds"
+Mg2Mo3O8,JVASP-19255,Mo,Mo_fallback,33.0,3.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-19255_perf.run.in']' timed out after 300 seconds"
+Mg2Mo3O8,JVASP-19255,O,O_fallback,28.0,8.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-19255_perf.run.in']' timed out after 300 seconds"
+MgCu2O4,JVASP-9884,Mg,Mg_s0,6.26,2,[001],1.14535,ok,
+MgCu2O4,JVASP-9884,Cu,Cu_s0,3.435,4,[001],1.074711,ok,
+MgCu2O4,JVASP-9884,O,O_s0,3.802,8,[001],1.074711,ok,
+MgCu2O4,JVASP-9908,Mg,Mg_s0,15.298,2,[001],2.190035,ok,
+MgCu2O4,JVASP-9908,Cu,Cu_s0,8.614,4,[100],1.072287,ok,
+MgCu2O4,JVASP-9908,O,O_s0,4.661,8,[001],1.072287,ok,
+MoH2O4,JVASP-54713,Mo,Mo_s0,2.272,2,[010],0.3,ok,
+MoH2O4,JVASP-54713,H,H_s0,1.679,4,[001],1.009167,ok,
+MoH2O4,JVASP-54713,O,O_s0,6.718,8,[010],1.680787,ok,
+MoWSe2S2,JVASP-28698,Mo,Mo_fallback,33.0,1.0,,,fallback,QE failed for JVASP-28698_perf with code 1. See /scratch/local/33070772/lumens-ed-gpu-33070772/workspace/calculations/pipeline_JVASP-28698/ed/JVASP-28698_perf.out.
+MoWSe2S2,JVASP-28698,W,W_fallback,55.0,1.0,,,fallback,QE failed for JVASP-28698_perf with code 1. See /scratch/local/33070772/lumens-ed-gpu-33070772/workspace/calculations/pipeline_JVASP-28698/ed/JVASP-28698_perf.out.
+MoWSe2S2,JVASP-28698,Se,Se_fallback,7.4,2.0,,,fallback,QE failed for JVASP-28698_perf with code 1. See /scratch/local/33070772/lumens-ed-gpu-33070772/workspace/calculations/pipeline_JVASP-28698/ed/JVASP-28698_perf.out.
+MoWSe2S2,JVASP-28698,S,S_fallback,7.6,2.0,,,fallback,QE failed for JVASP-28698_perf with code 1. See /scratch/local/33070772/lumens-ed-gpu-33070772/workspace/calculations/pipeline_JVASP-28698/ed/JVASP-28698_perf.out.
+Na2GaNiF7,JVASP-57312,Na,Na_fallback,8.0,2.0,,,fallback,QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out.
+Na2GaNiF7,JVASP-57312,Ga,Ga_fallback,9.4,1.0,,,fallback,QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out.
+Na2GaNiF7,JVASP-57312,Ni,Ni_fallback,23.0,1.0,,,fallback,QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out.
+Na2GaNiF7,JVASP-57312,F,F_fallback,15.0,7.0,,,fallback,QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out.
+Na2WO4,JVASP-11669,Na,Na_s0,27.677,4,[010],1.346686,ok,
+Na2WO4,JVASP-11669,W,W_s0,19.987,2,[100],1.053162,ok,
+Na2WO4,JVASP-11669,O,O_s0,7.052,8,[100],1.806324,ok,
+Na3VS3O,JVASP-12252,Na,Na_s0,5.67,6,[100],1.307063,ok,
+Na3VS3O,JVASP-12252,V,V_s0,2.908,2,[001],0.3,ok,
+Na3VS3O,JVASP-12252,S,S_s0,5.331,6,[001],1.23785,ok,
+Na3VS3O,JVASP-12252,O,O_s0,5.272,2,[010],1.687816,ok,
+NaS,JVASP-9152,Na,Na_s0,2.013,6,[100],2.837809,ok,
+NaS,JVASP-9152,S,S_s0,0.802,6,[001],0.3,ok,
+NbBi3O7,JVASP-13254,Nb,Nb_s0,1.558,1,[001],0.3,ok,
+NbBi3O7,JVASP-13254,Bi,Bi_s0,57.752,3,[001],1.268457,ok,
+NbBi3O7,JVASP-13254,O,O_s0,0.691,7,[001],0.3,ok,
+NbS2,JVASP-574,Nb,Nb_fallback,28.0,1.0,,,fallback,QE failed for JVASP-574_perf with code 1. See /scratch/local/33070893/lumens-ed-gpu-33070893/workspace/calculations/pipeline_JVASP-574/ed/JVASP-574_perf.out.
+NbS2,JVASP-574,S,S_fallback,7.6,2.0,,,fallback,QE failed for JVASP-574_perf with code 1. See /scratch/local/33070893/lumens-ed-gpu-33070893/workspace/calculations/pipeline_JVASP-574/ed/JVASP-574_perf.out.
+P2Se5,JVASP-5590,P,P_s0,8.7,8,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-5590_P_s0_[001]_1p298.run.in']' timed out after 300 seconds"
+P2Se5,JVASP-5590,Se,Se_s0,7.4,20,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-5590_Se_s0_[100]_2p289.run.in']' timed out after 300 seconds"
+PbS,JVASP-17941,Pb,Pb_s0,12.507,1,[100],1.727383,ok,
+PbS,JVASP-17941,S,S_s0,7.6,1,,,fallback,No reliable compound-specific DFT Ed found in scan.
+PtI2,JVASP-12896,Pt,Pt_s0,6.913,4,[001],1.463785,ok,
+PtI2,JVASP-12896,I,I_s0,10.106,8,[100],2.6427,ok,
+Rb2As3,JVASP-11390,Rb,Rb_s0,3.146,4,[100],1.966109,ok,
+Rb2As3,JVASP-11390,As,As_s0,5.88,6,[010],2.432893,ok,
+Rb4CuSi2O7,JVASP-25574,Rb,Rb_fallback,5.5,4.0,,,fallback,QE failed for JVASP-25574_perf with code 1. See /scratch/local/33071846/lumens-ed-gpu-33071846/workspace/calculations/pipeline_JVASP-25574/ed/JVASP-25574_perf.out.
+Rb4CuSi2O7,JVASP-25574,Cu,Cu_fallback,19.0,1.0,,,fallback,QE failed for JVASP-25574_perf with code 1. See /scratch/local/33071846/lumens-ed-gpu-33071846/workspace/calculations/pipeline_JVASP-25574/ed/JVASP-25574_perf.out.
+Rb4CuSi2O7,JVASP-25574,Si,Si_fallback,20.5,2.0,,,fallback,QE failed for JVASP-25574_perf with code 1. See /scratch/local/33071846/lumens-ed-gpu-33071846/workspace/calculations/pipeline_JVASP-25574/ed/JVASP-25574_perf.out.
+Rb4CuSi2O7,JVASP-25574,O,O_fallback,28.0,7.0,,,fallback,QE failed for JVASP-25574_perf with code 1. See /scratch/local/33071846/lumens-ed-gpu-33071846/workspace/calculations/pipeline_JVASP-25574/ed/JVASP-25574_perf.out.
+SCl2,JVASP-58833,S,S_s0,6.36,8,[100],2.054453,ok,
+SCl2,JVASP-58833,Cl,Cl_s0,4.261,16,[100],2.030425,ok,
+SbIrS,JVASP-10264,Sb,Sb_s0,47.815,4,[100],2.543658,ok,
+SbIrS,JVASP-10264,Ir,Ir_s0,122.53,4,[010],2.485873,ok,
+SbIrS,JVASP-10264,S,S_s0,24.467,4,[100],2.485873,ok,
+ScMo3O8,JVASP-12703,Sc,Sc_s0,7.235,1,[001],1.199672,ok,
+ScMo3O8,JVASP-12703,Mo,Mo_s0,7.526,3,[001],1.145422,ok,
+ScMo3O8,JVASP-12703,O,O_s0,8.658,8,[010],1.162881,ok,
+ScS,JVASP-19725,Sc,Sc_s0,46.408,1,[001],1.453534,ok,
+ScS,JVASP-19725,S,S_s0,48.251,1,[100],1.453534,ok,
+ScVO4,JVASP-11823,Sc,Sc_fallback,25.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+ScVO4,JVASP-11823,V,V_fallback,28.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+ScVO4,JVASP-11823,O,O_fallback,28.0,4.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-11823_perf.run.in']' timed out after 300 seconds"
+Si,JVASP-25415,Si,Si_s0,4.733,4,[010],2.36451,ok,
+SrTaNO2,JVASP-109687,Sr,Sr_s0,7.0,1,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-109687_Sr_s0_[100]_2p774.run.in']' timed out after 300 seconds"
+SrTaNO2,JVASP-109687,Ta,Ta_s0,0.56,1,[010],0.3,ok,
+SrTaNO2,JVASP-109687,N,N_s0,22.0,1,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-109687_N_s0_[100]_2p045.run.in']' timed out after 300 seconds"
+SrTaNO2,JVASP-109687,O,O_s0,28.0,2,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-109687_O_s0_[010]_2p021.run.in']' timed out after 300 seconds"
+SrZrS3,JVASP-21271,Sr,Sr_s0,19.813,4,[010],2.961796,ok,
+SrZrS3,JVASP-21271,Zr,Zr_s0,20.172,4,[001],2.545107,ok,
+SrZrS3,JVASP-21271,S,S_s0,21.908,12,[010],2.56521,ok,
+Ta2Te4Br10O,JVASP-31871,Ta,Ta_s0,11.673,2,[010],1.898701,ok,
+Ta2Te4Br10O,JVASP-31871,Te,Te_s0,9.079,4,[001],2.744439,ok,
+Ta2Te4Br10O,JVASP-31871,Br,Br_s0,7.234,10,[001],2.49611,ok,
+Ta2Te4Br10O,JVASP-31871,O,O_s0,7.082,1,[100],1.898701,ok,
+Te2Mo3WS6,JVASP-28699,Te,Te_fallback,5.5,2.0,,,fallback,QE failed for JVASP-28699_perf with code 1. See /scratch/local/33071728/lumens-ed-gpu-33071728/workspace/calculations/pipeline_JVASP-28699/ed/JVASP-28699_perf.out.
+Te2Mo3WS6,JVASP-28699,Mo,Mo_fallback,33.0,3.0,,,fallback,QE failed for JVASP-28699_perf with code 1. See /scratch/local/33071728/lumens-ed-gpu-33071728/workspace/calculations/pipeline_JVASP-28699/ed/JVASP-28699_perf.out.
+Te2Mo3WS6,JVASP-28699,W,W_fallback,55.0,1.0,,,fallback,QE failed for JVASP-28699_perf with code 1. See /scratch/local/33071728/lumens-ed-gpu-33071728/workspace/calculations/pipeline_JVASP-28699/ed/JVASP-28699_perf.out.
+Te2Mo3WS6,JVASP-28699,S,S_fallback,7.6,6.0,,,fallback,QE failed for JVASP-28699_perf with code 1. See /scratch/local/33071728/lumens-ed-gpu-33071728/workspace/calculations/pipeline_JVASP-28699/ed/JVASP-28699_perf.out.
+TeMoWSe3,JVASP-28952,Te,Te_fallback,5.5,1.0,,,fallback,QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out.
+TeMoWSe3,JVASP-28952,Mo,Mo_fallback,33.0,1.0,,,fallback,QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out.
+TeMoWSe3,JVASP-28952,W,W_fallback,55.0,1.0,,,fallback,QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out.
+TeMoWSe3,JVASP-28952,Se,Se_fallback,7.4,3.0,,,fallback,QE failed for JVASP-28952_perf with code 1. See /scratch/local/33071359/lumens-ed-gpu-33071359/workspace/calculations/pipeline_JVASP-28952/ed/JVASP-28952_perf.out.
+VRhO4,JVASP-42957,V,V_fallback,28.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-42957_perf.run.in']' timed out after 300 seconds"
+VRhO4,JVASP-42957,Rh,Rh_fallback,25.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-42957_perf.run.in']' timed out after 300 seconds"
+VRhO4,JVASP-42957,O,O_fallback,28.0,4.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-42957_perf.run.in']' timed out after 300 seconds"
+ZnBi2O5,JVASP-9800,Zn,Zn_s0,10.0,2,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9800_Zn_s0_[100]_1p103.run.in']' timed out after 300 seconds"
+ZnBi2O5,JVASP-9800,Bi,Bi_s0,8.0,4,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9800_Bi_s0_[100]_1p219.run.in']' timed out after 300 seconds"
+ZnBi2O5,JVASP-9800,O,O_s0,28.0,10,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9800_O_s0_[100]_1p205.run.in']' timed out after 300 seconds"
+ZnGeN2,JVASP-9374,Zn,Zn_s0,0.591,4,[001],0.3,ok,
+ZnGeN2,JVASP-9374,Ge,Ge_s0,14.5,4,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9374_Ge_s0_[010]_1p876.run.in']' timed out after 300 seconds"
+ZnGeN2,JVASP-9374,N,N_s0,22.0,8,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-9374_N_s0_[001]_1p886.run.in']' timed out after 300 seconds"
+ZnO,JVASP-17188,Zn,Zn_fallback,10.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17188_perf.run.in']' timed out after 300 seconds"
+ZnO,JVASP-17188,O,O_fallback,28.0,1.0,,,fallback,"Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17188_perf.run.in']' timed out after 300 seconds"
+ZnS,JVASP-10591,Zn,Zn_s0,4.311,6,[001],2.351943,ok,
+ZnS,JVASP-10591,S,S_s0,24.075,6,[100],2.352535,ok,

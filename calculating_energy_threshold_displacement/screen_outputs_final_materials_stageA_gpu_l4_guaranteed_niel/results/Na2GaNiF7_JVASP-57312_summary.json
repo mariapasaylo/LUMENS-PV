@@ -1,0 +1,145 @@
+{
+  "formula": "Na2GaNiF7",
+  "material_id": "JVASP-57312",
+  "status": "ok",
+  "calculation_method": "elemental_fallback_after_dft_failure",
+  "tde_interpretation": "fallback_screening_value_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "No converged DFT displacement energy; elemental fallback Ed used.",
+  "method_limitations": [
+    "Material-level QE calculation failed before a complete DFT displacement scan could be written.",
+    "Fallback values are literature/elemental screening estimates, not material-specific DFT barriers.",
+    "Rerun this material with a more forgiving DFT profile before using it for final physics claims."
+  ],
+  "material_selection": {
+    "selection_mode": "input_formula_fallback",
+    "candidate_count": null
+  },
+  "structure_source": "material_level_fallback_no_qe_result",
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 0,
+  "direction_index_start": 0,
+  "direction_index_stop": null,
+  "total_direction_count": 3,
+  "ed_values_eV": {
+    "Na": 8.0,
+    "Ga": 9.4,
+    "Ni": 23.0,
+    "F": 15.0
+  },
+  "element_aggregates_eV": {
+    "Na": {
+      "recommended_single_value_eV": 8.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 8.0,
+      "minimum_eV": 8.0,
+      "maximum_eV": 8.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Na_fallback"
+      ],
+      "site_values_eV": {
+        "Na_fallback": 8.0
+      },
+      "site_multiplicities": {
+        "Na_fallback": 2.0
+      }
+    },
+    "Ga": {
+      "recommended_single_value_eV": 9.4,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 9.4,
+      "minimum_eV": 9.4,
+      "maximum_eV": 9.4,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ga_fallback"
+      ],
+      "site_values_eV": {
+        "Ga_fallback": 9.4
+      },
+      "site_multiplicities": {
+        "Ga_fallback": 1.0
+      }
+    },
+    "Ni": {
+      "recommended_single_value_eV": 23.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 23.0,
+      "minimum_eV": 23.0,
+      "maximum_eV": 23.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ni_fallback"
+      ],
+      "site_values_eV": {
+        "Ni_fallback": 23.0
+      },
+      "site_multiplicities": {
+        "Ni_fallback": 1.0
+      }
+    },
+    "F": {
+      "recommended_single_value_eV": 15.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 15.0,
+      "minimum_eV": 15.0,
+      "maximum_eV": 15.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "F_fallback"
+      ],
+      "site_values_eV": {
+        "F_fallback": 15.0
+      },
+      "site_multiplicities": {
+        "F_fallback": 7.0
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Na",
+      "site_label": "Na_fallback",
+      "multiplicity": 2.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 8.0,
+      "fallback": true,
+      "error": "QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out."
+    },
+    {
+      "element": "Ga",
+      "site_label": "Ga_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 9.4,
+      "fallback": true,
+      "error": "QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out."
+    },
+    {
+      "element": "Ni",
+      "site_label": "Ni_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 23.0,
+      "fallback": true,
+      "error": "QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out."
+    },
+    {
+      "element": "F",
+      "site_label": "F_fallback",
+      "multiplicity": 7.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 15.0,
+      "fallback": true,
+      "error": "QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out."
+    }
+  ],
+  "error": "QE failed for JVASP-57312_perf with code 1. See /scratch/local/33071148/lumens-ed-gpu-33071148/workspace/calculations/pipeline_JVASP-57312/ed/JVASP-57312_perf.out."
+}

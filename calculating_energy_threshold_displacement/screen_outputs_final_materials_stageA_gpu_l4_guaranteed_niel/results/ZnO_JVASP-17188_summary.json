@@ -1,0 +1,89 @@
+{
+  "formula": "ZnO",
+  "material_id": "JVASP-17188",
+  "status": "ok",
+  "calculation_method": "elemental_fallback_after_dft_failure",
+  "tde_interpretation": "fallback_screening_value_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "No converged DFT displacement energy; elemental fallback Ed used.",
+  "method_limitations": [
+    "Material-level QE calculation failed before a complete DFT displacement scan could be written.",
+    "Fallback values are literature/elemental screening estimates, not material-specific DFT barriers.",
+    "Rerun this material with a more forgiving DFT profile before using it for final physics claims."
+  ],
+  "material_selection": {
+    "selection_mode": "input_formula_fallback",
+    "candidate_count": null
+  },
+  "structure_source": "material_level_fallback_no_qe_result",
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 0,
+  "direction_index_start": 0,
+  "direction_index_stop": null,
+  "total_direction_count": 3,
+  "ed_values_eV": {
+    "Zn": 10.0,
+    "O": 28.0
+  },
+  "element_aggregates_eV": {
+    "Zn": {
+      "recommended_single_value_eV": 10.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 10.0,
+      "minimum_eV": 10.0,
+      "maximum_eV": 10.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Zn_fallback"
+      ],
+      "site_values_eV": {
+        "Zn_fallback": 10.0
+      },
+      "site_multiplicities": {
+        "Zn_fallback": 1.0
+      }
+    },
+    "O": {
+      "recommended_single_value_eV": 28.0,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 28.0,
+      "minimum_eV": 28.0,
+      "maximum_eV": 28.0,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "O_fallback"
+      ],
+      "site_values_eV": {
+        "O_fallback": 28.0
+      },
+      "site_multiplicities": {
+        "O_fallback": 1.0
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Zn",
+      "site_label": "Zn_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 10.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17188_perf.run.in']' timed out after 300 seconds"
+    },
+    {
+      "element": "O",
+      "site_label": "O_fallback",
+      "multiplicity": 1.0,
+      "representative_index": null,
+      "status": "fallback",
+      "ed_eV": 28.0,
+      "fallback": true,
+      "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17188_perf.run.in']' timed out after 300 seconds"
+    }
+  ],
+  "error": "Command '['/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x', '-in', 'JVASP-17188_perf.run.in']' timed out after 300 seconds"
+}

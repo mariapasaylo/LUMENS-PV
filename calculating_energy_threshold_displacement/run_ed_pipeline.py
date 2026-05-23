@@ -426,10 +426,17 @@ def load_material_requests(
                     item_formula = (row.get("formula") or "").strip()
                     if not item_formula:
                         continue
+                    item_material_id = (
+                        row.get("material_id")
+                        or row.get("jid")
+                        or row.get("JID")
+                        or row.get("jarvis_id")
+                        or ""
+                    ).strip() or None
                     requests.append(
                         {
                             "formula": item_formula,
-                            "material_id": (row.get("material_id") or "").strip() or None,
+                            "material_id": item_material_id,
                         }
                     )
         else:
@@ -1084,7 +1091,13 @@ def select_material(dataset: list[dict], formula: str, material_id: str | None) 
         material = next((item for item in dataset if item.get("jid") == material_id), None)
         if material is None:
             raise RuntimeError(f"Could not locate material id {material_id} in JARVIS dft_3d.")
-        return material, {"selection_mode": "material_id", "candidate_count": 1}
+        actual_formula = str(material.get("formula") or "")
+        if actual_formula and actual_formula != formula:
+            raise RuntimeError(
+                f"Material id {material_id} is {actual_formula} in JARVIS dft_3d, "
+                f"but input formula was {formula}. Refusing to run a mismatched structure."
+            )
+        return material, {"selection_mode": "material_id", "candidate_count": 1, "formula_checked": True}
 
     matches = [item for item in dataset if item.get("formula") == formula]
     if not matches:
@@ -1803,6 +1816,14 @@ def process_material(
         "formula": formula,
         "material_id": material_id,
         "status": "ok",
+        "calculation_method": "dft_displacement_barrier_proxy",
+        "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+        "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+        "method_limitations": [
+            "No recoil velocity or molecular dynamics cascade is simulated.",
+            "No stable Frenkel-pair or defect-survival test is performed.",
+            "Use these values for screening/ranking unless validated against known TDE benchmarks."
+        ],
         "material_selection": selection_info,
         "structure_source": structure_source,
         "material_ehull_ev_per_atom": ehull,
@@ -1850,13 +1871,79 @@ def process_material(
     }
 
 
+
+def formula_stoichiometry(formula: str) -> dict[str, float]:
+    tokens = re.findall(r"([A-Z][a-z]?)([0-9]*\.?[0-9]*)", formula or "")
+    if not tokens:
+        return {}
+    stoich: dict[str, float] = {}
+    for element, raw_count in tokens:
+        count = float(raw_count) if raw_count else 1.0
+        stoich[element] = stoich.get(element, 0.0) + count
+    return stoich
+
+
+
+def build_material_fallback_summary(formula: str, material_id: str | None, args: argparse.Namespace, error: str) -> dict:
+    """Create a complete NIEL-ready summary when QE cannot produce a material-level result."""
+    stoich = formula_stoichiometry(formula)
+    site_results = []
+    for element, count in stoich.items():
+        fallback = float(get_default_ed(element))
+        site_results.append(
+            {
+                "element": element,
+                "site_label": f"{element}_fallback",
+                "multiplicity": count,
+                "representative_index": None,
+                "status": "fallback",
+                "ed_eV": round(fallback, 3),
+                "fallback": True,
+                "error": error,
+            }
+        )
+    element_aggregates = aggregate_element_sites(site_results, aggregation=args.element_aggregation) if site_results else {}
+    ed_values = {
+        element: aggregate["recommended_single_value_eV"]
+        for element, aggregate in element_aggregates.items()
+    }
+    return {
+        "formula": formula,
+        "material_id": material_id,
+        "status": "ok",
+        "calculation_method": "elemental_fallback_after_dft_failure",
+        "tde_interpretation": "fallback_screening_value_not_dynamic_threshold_displacement_energy",
+        "energy_difference_formula": "No converged DFT displacement energy; elemental fallback Ed used.",
+        "method_limitations": [
+            "Material-level QE calculation failed before a complete DFT displacement scan could be written.",
+            "Fallback values are literature/elemental screening estimates, not material-specific DFT barriers.",
+            "Rerun this material with a more forgiving DFT profile before using it for final physics claims.",
+        ],
+        "material_selection": {"selection_mode": "input_formula_fallback", "candidate_count": None},
+        "structure_source": "material_level_fallback_no_qe_result",
+        "qe_executable": args.qe_executable,
+        "qe_relax_applied": False,
+        "ed_mode": args.ed_mode,
+        "direction_mode": args.direction_mode,
+        "direction_count": 0,
+        "direction_index_start": args.direction_index_start,
+        "direction_index_stop": args.direction_index_stop,
+        "total_direction_count": args.ed_directions,
+        "ed_values_eV": ed_values,
+        "element_aggregates_eV": element_aggregates,
+        "site_results": site_results,
+        "error": error,
+    }
+
 def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
     element_csv_path = results_dir / "ed_results.csv"
     site_csv_path = results_dir / "ed_site_results.csv"
+    niel_csv_path = results_dir / "niel_ed_inputs.csv"
     json_path = results_dir / "ed_batch_summary.json"
 
     element_rows: list[dict[str, str | float | int | None]] = []
     site_rows: list[dict[str, str | float | int | None]] = []
+    niel_rows: list[dict[str, str | float | int | None]] = []
     for summary in summaries:
         if summary.get("status") != "ok":
             element_rows.append(
@@ -1878,13 +1965,15 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
             )
             continue
 
+        stoichiometry = formula_stoichiometry(str(summary["formula"]))
         for element, aggregate in summary["element_aggregates_eV"].items():
+            recommended_ed = aggregate["recommended_single_value_eV"]
             element_rows.append(
                 {
                     "formula": summary["formula"],
                     "material_id": summary["material_id"],
                     "element": element,
-                    "recommended_ed_eV": aggregate["recommended_single_value_eV"],
+                    "recommended_ed_eV": recommended_ed,
                     "aggregation_mode": aggregate["aggregation_mode"],
                     "weighted_mean_ed_eV": aggregate["weighted_mean_eV"],
                     "minimum_ed_eV": aggregate["minimum_eV"],
@@ -1894,6 +1983,26 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
                     "ed_mode": summary["ed_mode"],
                     "status": summary["status"],
                     "error": "",
+                }
+            )
+            niel_rows.append(
+                {
+                    "formula": summary["formula"],
+                    "material_id": summary["material_id"],
+                    "element": element,
+                    "stoichiometric_index": stoichiometry.get(element, ""),
+                    "displacement_threshold_energy_eV": recommended_ed,
+                    "ed_interpretation": summary.get(
+                        "tde_interpretation",
+                        "screening_proxy_not_dynamic_threshold_displacement_energy",
+                    ),
+                    "calculation_method": summary.get("calculation_method", "dft_displacement_barrier_proxy"),
+                    "aggregation_mode": aggregate["aggregation_mode"],
+                    "site_count": aggregate["inequivalent_site_count"],
+                    "structure_source": summary["structure_source"],
+                    "ed_mode": summary["ed_mode"],
+                    "status": summary["status"],
+                    "notes": "Use as SR-NIEL Ed input only after benchmark validation; current value is a DFT displacement-barrier proxy.",
                 }
             )
 
@@ -1950,12 +2059,33 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
         writer.writeheader()
         writer.writerows(site_rows)
 
+    with niel_csv_path.open("w", encoding="utf-8", newline="") as handle:
+        fieldnames = [
+            "formula",
+            "material_id",
+            "element",
+            "stoichiometric_index",
+            "displacement_threshold_energy_eV",
+            "ed_interpretation",
+            "calculation_method",
+            "aggregation_mode",
+            "site_count",
+            "structure_source",
+            "ed_mode",
+            "status",
+            "notes",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(niel_rows)
+
     batch_summary = {
         "total_requests": len(summaries),
         "successful_materials": sum(1 for summary in summaries if summary.get("status") == "ok"),
         "failed_materials": sum(1 for summary in summaries if summary.get("status") != "ok"),
         "results_csv": str(element_csv_path),
         "site_results_csv": str(site_csv_path),
+        "niel_ed_inputs_csv": str(niel_csv_path),
         "material_summaries": summaries,
     }
     with json_path.open("w", encoding="utf-8") as handle:
@@ -1982,15 +2112,24 @@ def main() -> int:
         try:
             summary = process_material(dataset, request, args, workspace)
         except Exception as exc:
-            failures += 1
-            summary = {
-                "formula": formula,
-                "material_id": request.get("material_id"),
-                "status": "failed",
-                "ed_mode": args.ed_mode,
-                "error": str(exc),
-            }
-            print(f"  Failed: {exc}")
+            if args.allow_ed_fallback:
+                summary = build_material_fallback_summary(
+                    formula,
+                    request.get("material_id"),
+                    args,
+                    str(exc),
+                )
+                print(f"  DFT failed; wrote material-level fallback Ed values: {exc}")
+            else:
+                failures += 1
+                summary = {
+                    "formula": formula,
+                    "material_id": request.get("material_id"),
+                    "status": "failed",
+                    "ed_mode": args.ed_mode,
+                    "error": str(exc),
+                }
+                print(f"  Failed: {exc}")
         summaries.append(summary)
         summary_stub = sanitize_stub(
             f"{summary.get('formula', formula)}_{summary.get('material_id') or 'auto'}"

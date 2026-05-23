@@ -1,0 +1,427 @@
+{
+  "formula": "Ca3SnH2",
+  "material_id": "JVASP-37879",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.0,
+  "material_bandgap_ev": 0.468,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": false,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    16,
+    12,
+    12
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 80.0,
+  "primitive_ecutrho_ry": 800.0,
+  "ed_scan_supercell_atoms": 24,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.468,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 0.468,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Ca": 6.884,
+    "Sn": 20.699,
+    "H": 1.517
+  },
+  "element_aggregates_eV": {
+    "Ca": {
+      "recommended_single_value_eV": 6.884,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 6.884,
+      "minimum_eV": 6.884,
+      "maximum_eV": 6.884,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ca_s0"
+      ],
+      "site_values_eV": {
+        "Ca_s0": 6.884
+      },
+      "site_multiplicities": {
+        "Ca_s0": 6
+      }
+    },
+    "Sn": {
+      "recommended_single_value_eV": 20.699,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 20.699,
+      "minimum_eV": 20.699,
+      "maximum_eV": 20.699,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Sn_s0"
+      ],
+      "site_values_eV": {
+        "Sn_s0": 20.699
+      },
+      "site_multiplicities": {
+        "Sn_s0": 2
+      }
+    },
+    "H": {
+      "recommended_single_value_eV": 1.517,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 1.517,
+      "minimum_eV": 1.517,
+      "maximum_eV": 1.517,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "H_s0"
+      ],
+      "site_values_eV": {
+        "H_s0": 1.517
+      },
+      "site_multiplicities": {
+        "H_s0": 4
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Ca",
+      "site_label": "Ca_s0",
+      "multiplicity": 6,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 6.884,
+      "best_direction": "[100]",
+      "best_direction_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.246551,
+      "best_tag": "JVASP-37879_Ca_s0_[100]_2p247",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.2465509953296805,
+          "best_energy_ev": 6.884098478636984,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.18279330191912613,
+              "tag": "JVASP-37879_Ca_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2732754976648402,
+              "energy_ev": 2.773545554359382,
+              "tag": "JVASP-37879_Ca_s0_[100]_1p273"
+            },
+            {
+              "distance_angstrom": 2.2465509953296805,
+              "energy_ev": 6.884098478636984,
+              "tag": "JVASP-37879_Ca_s0_[100]_2p247"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.2465509953296805,
+          "best_energy_ev": 11.787017439405634,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.2743258737498509,
+              "tag": "JVASP-37879_Ca_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2732754976648402,
+              "energy_ev": 3.9703778230246094,
+              "tag": "JVASP-37879_Ca_s0_[010]_1p273"
+            },
+            {
+              "distance_angstrom": 2.2465509953296805,
+              "energy_ev": 11.787017439405634,
+              "tag": "JVASP-37879_Ca_s0_[010]_2p247"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 2.2465509953296805,
+          "best_energy_ev": 7.601647897723393,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.25465272193956107,
+              "tag": "JVASP-37879_Ca_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2732754976648402,
+              "energy_ev": 3.829538763958166,
+              "tag": "JVASP-37879_Ca_s0_[001]_1p273"
+            },
+            {
+              "distance_angstrom": 2.2465509953296805,
+              "energy_ev": 7.601647897723393,
+              "tag": "JVASP-37879_Ca_s0_[001]_2p247"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "Sn",
+      "site_label": "Sn_s0",
+      "multiplicity": 2,
+      "representative_index": 6,
+      "status": "ok",
+      "ed_eV": 20.699,
+      "best_direction": "[001]",
+      "best_direction_vector": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "best_distance_angstrom": 3.296831,
+      "best_tag": "JVASP-37879_Sn_s0_[001]_3p297",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 3.2968312635732704,
+          "best_energy_ev": 36.84673154466548,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.07520914164223971,
+              "tag": "JVASP-37879_Sn_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7984156317866353,
+              "energy_ev": 4.4219483249711455,
+              "tag": "JVASP-37879_Sn_s0_[100]_1p798"
+            },
+            {
+              "distance_angstrom": 3.2968312635732704,
+              "energy_ev": 36.84673154466548,
+              "tag": "JVASP-37879_Sn_s0_[100]_3p297"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 3.2968312635732704,
+          "best_energy_ev": 24.896672323943037,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.16464276321638874,
+              "tag": "JVASP-37879_Sn_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7984156317866353,
+              "energy_ev": 5.039045960175877,
+              "tag": "JVASP-37879_Sn_s0_[010]_1p798"
+            },
+            {
+              "distance_angstrom": 3.2968312635732704,
+              "energy_ev": 24.896672323943037,
+              "tag": "JVASP-37879_Sn_s0_[010]_3p297"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 3.2968312635732704,
+          "best_energy_ev": 20.698895750810454,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.16135603595523754,
+              "tag": "JVASP-37879_Sn_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.7984156317866353,
+              "energy_ev": 9.754853716294429,
+              "tag": "JVASP-37879_Sn_s0_[001]_1p798"
+            },
+            {
+              "distance_angstrom": 3.2968312635732704,
+              "energy_ev": 20.698895750810454,
+              "tag": "JVASP-37879_Sn_s0_[001]_3p297"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "H",
+      "site_label": "H_s0",
+      "multiplicity": 4,
+      "representative_index": 8,
+      "status": "ok",
+      "ed_eV": 1.517,
+      "best_direction": "[010]",
+      "best_direction_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.22316,
+      "best_tag": "JVASP-37879_H_s0_[010]_2p223",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.223159560916759,
+          "best_energy_ev": 1.5200178186967888,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.11670528081139872,
+              "tag": "JVASP-37879_H_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2615797804583795,
+              "energy_ev": 1.4386189030762973,
+              "tag": "JVASP-37879_H_s0_[100]_1p262"
+            },
+            {
+              "distance_angstrom": 2.223159560916759,
+              "energy_ev": 1.5200178186967888,
+              "tag": "JVASP-37879_H_s0_[100]_2p223"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.223159560916759,
+          "best_energy_ev": 1.5173558648592609,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.13147344422795473,
+              "tag": "JVASP-37879_H_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2615797804583795,
+              "energy_ev": 1.3927066280720533,
+              "tag": "JVASP-37879_H_s0_[010]_1p262"
+            },
+            {
+              "distance_angstrom": 2.223159560916759,
+              "energy_ev": 1.5173558648592609,
+              "tag": "JVASP-37879_H_s0_[010]_2p223"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 1.2615797804583795,
+          "best_energy_ev": 1.8605744372743362,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.14643848202539606,
+              "tag": "JVASP-37879_H_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.2615797804583795,
+              "energy_ev": 1.8605744372743362,
+              "tag": "JVASP-37879_H_s0_[001]_1p262"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    }
+  ]
+}

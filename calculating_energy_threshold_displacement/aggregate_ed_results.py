@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 from pathlib import Path
 
 
@@ -20,7 +21,10 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_summaries(results_dir: Path) -> list[dict]:
-    summary_paths = sorted(results_dir.glob("*_summary.json"))
+    summary_paths = sorted(
+        path for path in results_dir.glob("*_summary.json")
+        if path.name != "ed_batch_summary.json"
+    )
     if not summary_paths:
         raise SystemExit(f"No per-material summary JSON files were found in {results_dir}")
 
@@ -42,13 +46,27 @@ def load_summaries(results_dir: Path) -> list[dict]:
     return summaries
 
 
+
+def formula_stoichiometry(formula: str) -> dict[str, float]:
+    tokens = re.findall(r"([A-Z][a-z]?)([0-9]*\.?[0-9]*)", formula or "")
+    if not tokens:
+        return {}
+    stoich: dict[str, float] = {}
+    for element, raw_count in tokens:
+        count = float(raw_count) if raw_count else 1.0
+        stoich[element] = stoich.get(element, 0.0) + count
+    return stoich
+
+
 def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
     element_csv_path = results_dir / "ed_results.csv"
     site_csv_path = results_dir / "ed_site_results.csv"
+    niel_csv_path = results_dir / "niel_ed_inputs.csv"
     json_path = results_dir / "ed_batch_summary.json"
 
     element_rows: list[dict[str, str | float | int | None]] = []
     site_rows: list[dict[str, str | float | int | None]] = []
+    niel_rows: list[dict[str, str | float | int | None]] = []
     for summary in summaries:
         if summary.get("status") != "ok":
             element_rows.append(
@@ -70,13 +88,15 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
             )
             continue
 
+        stoichiometry = formula_stoichiometry(str(summary["formula"]))
         for element, aggregate in summary["element_aggregates_eV"].items():
+            recommended_ed = aggregate["recommended_single_value_eV"]
             element_rows.append(
                 {
                     "formula": summary["formula"],
                     "material_id": summary["material_id"],
                     "element": element,
-                    "recommended_ed_eV": aggregate["recommended_single_value_eV"],
+                    "recommended_ed_eV": recommended_ed,
                     "aggregation_mode": aggregate["aggregation_mode"],
                     "weighted_mean_ed_eV": aggregate["weighted_mean_eV"],
                     "minimum_ed_eV": aggregate["minimum_eV"],
@@ -86,6 +106,26 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
                     "ed_mode": summary["ed_mode"],
                     "status": summary["status"],
                     "error": "",
+                }
+            )
+            niel_rows.append(
+                {
+                    "formula": summary["formula"],
+                    "material_id": summary["material_id"],
+                    "element": element,
+                    "stoichiometric_index": stoichiometry.get(element, ""),
+                    "displacement_threshold_energy_eV": recommended_ed,
+                    "ed_interpretation": summary.get(
+                        "tde_interpretation",
+                        "screening_proxy_not_dynamic_threshold_displacement_energy",
+                    ),
+                    "calculation_method": summary.get("calculation_method", "dft_displacement_barrier_proxy"),
+                    "aggregation_mode": aggregate["aggregation_mode"],
+                    "site_count": aggregate["inequivalent_site_count"],
+                    "structure_source": summary["structure_source"],
+                    "ed_mode": summary["ed_mode"],
+                    "status": summary["status"],
+                    "notes": "Use as SR-NIEL Ed input only after benchmark validation; current value is a DFT displacement-barrier proxy.",
                 }
             )
 
@@ -142,12 +182,33 @@ def write_aggregate_outputs(results_dir: Path, summaries: list[dict]) -> None:
         writer.writeheader()
         writer.writerows(site_rows)
 
+    with niel_csv_path.open("w", encoding="utf-8", newline="") as handle:
+        fieldnames = [
+            "formula",
+            "material_id",
+            "element",
+            "stoichiometric_index",
+            "displacement_threshold_energy_eV",
+            "ed_interpretation",
+            "calculation_method",
+            "aggregation_mode",
+            "site_count",
+            "structure_source",
+            "ed_mode",
+            "status",
+            "notes",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(niel_rows)
+
     batch_summary = {
         "total_requests": len(summaries),
         "successful_materials": sum(1 for summary in summaries if summary.get("status") == "ok"),
         "failed_materials": sum(1 for summary in summaries if summary.get("status") != "ok"),
         "results_csv": str(element_csv_path),
         "site_results_csv": str(site_csv_path),
+        "niel_ed_inputs_csv": str(niel_csv_path),
         "material_summaries": summaries,
     }
     with json_path.open("w", encoding="utf-8") as handle:

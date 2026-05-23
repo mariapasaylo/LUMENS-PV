@@ -1,0 +1,432 @@
+{
+  "formula": "SbIrS",
+  "material_id": "JVASP-10264",
+  "status": "ok",
+  "calculation_method": "dft_displacement_barrier_proxy",
+  "tde_interpretation": "screening_proxy_not_dynamic_threshold_displacement_energy",
+  "energy_difference_formula": "barrier_eV = (E_displaced_Ry - E_reference_Ry) * 13.605693009",
+  "method_limitations": [
+    "No recoil velocity or molecular dynamics cascade is simulated.",
+    "No stable Frenkel-pair or defect-survival test is performed.",
+    "Use these values for screening/ranking unless validated against known TDE benchmarks."
+  ],
+  "material_selection": {
+    "selection_mode": "material_id",
+    "candidate_count": 1,
+    "formula_checked": true
+  },
+  "structure_source": "jarvis_relaxed_input+idealized",
+  "material_ehull_ev_per_atom": 0.0,
+  "material_bandgap_ev": 1.619,
+  "material_total_magmom_mub": 0.0,
+  "correlated_electron_caution": true,
+  "qe_executable": "/apps/nvhpc/26.3/openmpi/5.0.7/espresso/7.5.0_l4/bin/pw.x",
+  "qe_relax_applied": false,
+  "ed_mode": "static",
+  "direction_mode": "highsym",
+  "direction_count": 3,
+  "direction_index_start": 0,
+  "direction_index_stop": 3,
+  "total_direction_count": 3,
+  "primitive_k_points": [
+    13,
+    13,
+    13
+  ],
+  "ed_k_points": [
+    1,
+    1,
+    1
+  ],
+  "primitive_ecutwfc_ry": 80.0,
+  "primitive_ecutrho_ry": 800.0,
+  "ed_scan_supercell_atoms": 12,
+  "primitive_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 1.619,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.0001,
+    "etot_conv_thr": 1e-06,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_electronic_settings": {
+    "occupations": "fixed",
+    "spin_polarized": false,
+    "bandgap_ev": 1.619,
+    "total_magmom_mub": 0.0,
+    "electron_conv_thr": 1e-06,
+    "force_conv_thr": 0.001,
+    "etot_conv_thr": 0.0001,
+    "degauss": 0.01,
+    "mixing_beta": 0.3
+  },
+  "ed_values_eV": {
+    "Sb": 47.815,
+    "Ir": 122.53,
+    "S": 24.467
+  },
+  "element_aggregates_eV": {
+    "Sb": {
+      "recommended_single_value_eV": 47.815,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 47.815,
+      "minimum_eV": 47.815,
+      "maximum_eV": 47.815,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Sb_s0"
+      ],
+      "site_values_eV": {
+        "Sb_s0": 47.815
+      },
+      "site_multiplicities": {
+        "Sb_s0": 4
+      }
+    },
+    "Ir": {
+      "recommended_single_value_eV": 122.53,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 122.53,
+      "minimum_eV": 122.53,
+      "maximum_eV": 122.53,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "Ir_s0"
+      ],
+      "site_values_eV": {
+        "Ir_s0": 122.53
+      },
+      "site_multiplicities": {
+        "Ir_s0": 4
+      }
+    },
+    "S": {
+      "recommended_single_value_eV": 24.467,
+      "aggregation_mode": "min",
+      "weighted_mean_eV": 24.467,
+      "minimum_eV": 24.467,
+      "maximum_eV": 24.467,
+      "inequivalent_site_count": 1,
+      "site_labels": [
+        "S_s0"
+      ],
+      "site_values_eV": {
+        "S_s0": 24.467
+      },
+      "site_multiplicities": {
+        "S_s0": 4
+      }
+    }
+  },
+  "site_results": [
+    {
+      "element": "Sb",
+      "site_label": "Sb_s0",
+      "multiplicity": 4,
+      "representative_index": 0,
+      "status": "ok",
+      "ed_eV": 47.815,
+      "best_direction": "[100]",
+      "best_direction_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.543658,
+      "best_tag": "JVASP-10264_Sb_s0_[100]_2p544",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.543658444100503,
+          "best_energy_ev": 47.81529770477392,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.12206714837067369,
+              "tag": "JVASP-10264_Sb_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.4218292220502515,
+              "energy_ev": 6.904742804808184,
+              "tag": "JVASP-10264_Sb_s0_[100]_1p422"
+            },
+            {
+              "distance_angstrom": 2.543658444100503,
+              "energy_ev": 47.81529770477392,
+              "tag": "JVASP-10264_Sb_s0_[100]_2p544"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.543658444100503,
+          "best_energy_ev": 47.8153015143648,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.12206728442616491,
+              "tag": "JVASP-10264_Sb_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.4218292220502515,
+              "energy_ev": 6.904749607656992,
+              "tag": "JVASP-10264_Sb_s0_[010]_1p422"
+            },
+            {
+              "distance_angstrom": 2.543658444100503,
+              "energy_ev": 47.8153015143648,
+              "tag": "JVASP-10264_Sb_s0_[010]_2p544"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 2.543658444100503,
+          "best_energy_ev": 47.81530382733289,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.1220664680808432,
+              "tag": "JVASP-10264_Sb_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.4218292220502515,
+              "energy_ev": 6.904740219729103,
+              "tag": "JVASP-10264_Sb_s0_[001]_1p422"
+            },
+            {
+              "distance_angstrom": 2.543658444100503,
+              "energy_ev": 47.81530382733289,
+              "tag": "JVASP-10264_Sb_s0_[001]_2p544"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "Ir",
+      "site_label": "Ir_s0",
+      "multiplicity": 4,
+      "representative_index": 4,
+      "status": "ok",
+      "ed_eV": 122.53,
+      "best_direction": "[010]",
+      "best_direction_vector": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.485873,
+      "best_tag": "JVASP-10264_Ir_s0_[010]_2p486",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 179.29003461078764,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.7753447703005667,
+              "tag": "JVASP-10264_Ir_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 47.85840353347453,
+              "tag": "JVASP-10264_Ir_s0_[100]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 179.29003461078764,
+              "tag": "JVASP-10264_Ir_s0_[100]_2p486"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 122.53000166233848,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.6251217287125163,
+              "tag": "JVASP-10264_Ir_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 33.759283876730116,
+              "tag": "JVASP-10264_Ir_s0_[010]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 122.53000166233848,
+              "tag": "JVASP-10264_Ir_s0_[010]_2p486"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 178.87368775142716,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 0.7753487159593097,
+              "tag": "JVASP-10264_Ir_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 48.3116959719331,
+              "tag": "JVASP-10264_Ir_s0_[001]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 178.87368775142716,
+              "tag": "JVASP-10264_Ir_s0_[001]_2p486"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "element": "S",
+      "site_label": "S_s0",
+      "multiplicity": 4,
+      "representative_index": 8,
+      "status": "ok",
+      "ed_eV": 24.467,
+      "best_direction": "[100]",
+      "best_direction_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "best_distance_angstrom": 2.485873,
+      "best_tag": "JVASP-10264_S_s0_[100]_2p486",
+      "direction_results": [
+        {
+          "direction": "[100]",
+          "vector": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 24.467193113623985,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": -0.2794221581874579,
+              "tag": "JVASP-10264_S_s0_[100]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 5.33807160900728,
+              "tag": "JVASP-10264_S_s0_[100]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 24.467193113623985,
+              "tag": "JVASP-10264_S_s0_[100]_2p486"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[010]",
+          "vector": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 113.34905009102663,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": 1.2224826735243388,
+              "tag": "JVASP-10264_S_s0_[010]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 37.27616993791025,
+              "tag": "JVASP-10264_S_s0_[010]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 113.34905009102663,
+              "tag": "JVASP-10264_S_s0_[010]_2p486"
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "direction": "[001]",
+          "vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "best_distance_angstrom": 2.48587301772319,
+          "best_energy_ev": 24.467194746302255,
+          "scan": [
+            {
+              "distance_angstrom": 0.3,
+              "energy_ev": -0.27941957309600157,
+              "tag": "JVASP-10264_S_s0_[001]_0p300"
+            },
+            {
+              "distance_angstrom": 1.392936508861595,
+              "energy_ev": 5.338068071527386,
+              "tag": "JVASP-10264_S_s0_[001]_1p393"
+            },
+            {
+              "distance_angstrom": 2.48587301772319,
+              "energy_ev": 24.467194746302255,
+              "tag": "JVASP-10264_S_s0_[001]_2p486"
+            }
+          ],
+          "status": "ok"
+        }
+      ]
+    }
+  ]
+}
